@@ -1,71 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  <title>Expense Tracker</title>
-  <link rel="stylesheet" href="stylesheets/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
 <body>
-  <header>
-    <h3>Expense Tracker</h3>
-  </header>
-  <section class="items-section">
-    <div class="index-view1">
-      <h4>Enter Items to Index</h4>
-      <table id="inserted-data">
-        <tr class="heading-row">
-          <th>Item</th>
-          <th>Category</th>
-          <th>Amount</th>
-          <th>Submit</th>
-        </tr>
-        <tr class="insert-row">
-          <td>
-            <input type="text" class="form-controls item-input" placeholder="ex:Amazon" />
-          </td>
-          <td>
-            <select class="form-controls" name="category-selector" id="category-selector">
-              <option value="default" selected>Select</option>
-              <option value="general">General</option>
-              <option value="food">Food</option>
-              <option value="rent">Rent</option>
-              <option value="travel">Travel</option>
-              <option value="enterainment">Enterainment</option>
-            </select>
-          </td>
-          <td>
-            <input type="number" class="form-controls amount-input" min="0" />
-          </td>
-          <td>
-            <button type="submit" class="submit-button" onclick="getData()" id="getData">
-              Add
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <header>
+        <h3>Expense Tracker</h3>
+    </header>
+    <section class="items-section">
+        <div class="index-view1">
+            <h4>Enter Items to Index</h4>
+            <table id="inserted-data">
+                <tr class="heading-row">
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Submit</th>
+                </tr>
+                <tr class="insert-row">
+                    <td>
+                        <input type="text" class="form-controls item-input" placeholder="ex:Amazon">
+                    </td>
+                    <td>
+                        <select class="form-controls" name="category-selector" id="category-selector">
+                            <option value="default" selected>Select</option>
+                            <option value="General">General</option>
+                            <option value="Food">Food</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Enterainment">Enterainment</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" class="form-controls amount-input" min="0">
+                    </td>
+                    <td>
+                        <button type="submit" class="submit-button" onclick="getData()" id="getData">Add</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-    <div class="index-view2">
-      <h4>Your Index</h4>
-      <table id="showInsertedData">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody id="viewInsertedData"></tbody>
-      </table>
-    </div>
-  </section>
-  <!-- scripts -->
-  <script src="javascripts/script.js"></script>
+        <div class="index-view2">
+            <h4>Your Index</h4>
+            <table id="showInsertedData">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="viewInsertedData"></tbody>
+            </table>
+        </div>
+    </section>
+    <!-- scripts -->
+    <script src="javascripts/script.js"></script>
 </body>
 
 </html>
