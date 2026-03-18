@@ -25,7 +25,8 @@ body {
         radial-gradient(at 100% 100%, rgba(30, 41, 59, 0.4) 0px, transparent 50%);
     color: var(--text-main);
     font-family: 'Plus Jakarta Sans', sans-serif;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .dashboard-container {
@@ -89,6 +90,8 @@ body {
 }
 
 .input-card, .display-card {
+    height: 52vh;
+    overflow: auto;
     background: var(--card-bg);
     backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
@@ -215,4 +218,31 @@ tr td:last-child { border-radius: 0 12px 12px 0; }
 
 @media (max-width: 900px) {
     .content-grid { grid-template-columns: 1fr; }
+}
+
+/* 1. Firefox Support (Applies to all elements) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.02);
+}
+
+/* 2. Chrome, Edge, and Safari Support (Applies globally) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  border: 2px solid var(--card-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0ea5e9;
 }
