@@ -10,4 +10,3 @@ function getData(){
     let amountValue = amount.value;
 
 }
- getData()
