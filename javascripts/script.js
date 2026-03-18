@@ -8,5 +8,5 @@ function getData() {
   let itemValue = item.value;
   let categoryValue = category.value;
   let amountValue = amount.value;
-
+  
 }
