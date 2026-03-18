@@ -9,4 +9,6 @@ function getData(){
     let categoryValue = category.value;
     let amountValue = amount.value;
 
-}
+    let tableBody = document.querySelector('#viewInsertedData')
+
+}s
