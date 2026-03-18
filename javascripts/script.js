@@ -1,69 +1,35 @@
-let total = 0;
-const btnYes = document.getElementById('btn-yes');
-const btnNo = document.getElementById('btn-no');
-const hiddenInput = document.getElementById('paid-status-hidden');
-
-function setStatus(isPaid) {
-  if (isPaid) {
-    btnYes.classList.add('active');
-    btnNo.classList.remove('active');
-    hiddenInput.value = "true";
-  } else {
-    btnNo.classList.add('active');
-    btnYes.classList.remove('active');
-    hiddenInput.value = "false";
-  }
-}
-
-btnYes.addEventListener('click', () => setStatus(true));
-btnNo.addEventListener('click', () => setStatus(false));
-
+const date = new Date().toLocaleDateString("en-GB");
 
 function getData() {
-  // Fetching Inserted Value
-  const itemInput = document.querySelector(".item-input");
-  const categorySelector = document.querySelector("#category-selector");
-  const amountInput = document.querySelector(".amount-input");
-  const statusHiddenValue = document.getElementById("paid-status-hidden").value;
+  //taking values
+  let item = document.querySelector(".item-input");
+  let category = document.querySelector("#category-selector");
+  let amount = document.querySelector(".amount-input");
 
-  // Storing Values
-  const itemValue = itemInput.value.trim();
-  const categoryValue = categorySelector.value;
-  const amountValue = amountInput.value;
-  const isPaid = statusHiddenValue === "true";
+  // storing values
+  let itemValue = item.value;
+  let categoryValue = category.value;
+  let amountValue = amount.value;
 
-  // Validation
-  if (!itemValue || !amountValue || amountValue <= 0) {
-    alert("Please provide a valid item name and amount.");
+  //checking if value empty
+  if (itemValue == null || categoryValue === "default" || amountValue === "$") {
+    alert("Please fill the fields below to enter");
     return;
   }
 
   //getting output table
   const tableBody = document.querySelector("#viewInsertedData");
-  const formattedAmount = parseFloat(amountValue).toLocaleString('en-IN');
-  const newRow = `
-      <tr>
-          <td>${itemValue}</td>
-          <td><span class="category-badge">${categoryValue}</span></td>
-          <td class="amount-text">₹${amountValue}</td>
-          <td>
-              <span class="paid-status ${isPaid ? "status-yes" : "status-no"}">
-                  ${isPaid ? "YES" : "NO"}
-              </span>
-          </td>
-          <td>${new Date().toLocaleDateString("en-GB")}</td>
-      </tr>
-  `;
 
-  //displaying the total expenditure
-  if (paidCheckbox.checked == true) {
-    total += Number(amountInput.value);
-    document.querySelector("#total-amount").textContent = "₹" + total;
-  }
+  //updating output table
+  tableBody.innerHTML += `<tr>
+    <td>${itemValue}</td>
+    <td>${categoryValue}</td>
+    <td>$${amountValue}</td>
+    <td>${date}</td>
+    </tr>`;
 
-  //clearing the input boxes
-  tableBody.innerHTML += newRow;
-  itemInput.value = "";
-  amountInput.value = "";
-  setStatus(true);
+  //clearing the input box
+  item.value = "";
+  category.value = "default";
+  amount.value = "";
 }
