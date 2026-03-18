@@ -1,27 +1,49 @@
 let total = 0;
+const btnYes = document.getElementById('btn-yes');
+const btnNo = document.getElementById('btn-no');
+const hiddenInput = document.getElementById('paid-status-hidden');
+
+function setStatus(isPaid) {
+  if (isPaid) {
+    btnYes.classList.add('active');
+    btnNo.classList.remove('active');
+    hiddenInput.value = "true";
+  } else {
+    btnNo.classList.add('active');
+    btnYes.classList.remove('active');
+    hiddenInput.value = "false";
+  }
+}
+
+btnYes.addEventListener('click', () => setStatus(true));
+btnNo.addEventListener('click', () => setStatus(false));
+
 
 function getData() {
-  // Taking Inserted Values From the Table
+  // Fetching Inserted Value
   const itemInput = document.querySelector(".item-input");
   const categorySelector = document.querySelector("#category-selector");
   const amountInput = document.querySelector(".amount-input");
-  const paidCheckbox = document.querySelector("#paid-check");
+  const statusHiddenValue = document.getElementById("paid-status-hidden").value;
 
   // Storing Values
-  const itemValue = itemInput.value;
+  const itemValue = itemInput.value.trim();
   const categoryValue = categorySelector.value;
   const amountValue = amountInput.value;
-  const isPaid = paidCheckbox.checked;
+  const isPaid = statusHiddenValue === "true";
 
-  if (itemValue == null || categoryValue === "default" || amountValue === "$") {
-    alert("Please fill the fields below to enter");
+  // Validation
+  if (!itemValue || !amountValue || amountValue <= 0) {
+    alert("Please provide a valid item name and amount.");
     return;
   }
+>>>>>>> d42fbad (change: color of the read button changed)
 
   //getting output table
   const tableBody = document.querySelector("#viewInsertedData");
-  // Create the row with badge HTML
+  const formattedAmount = parseFloat(amountValue).toLocaleString('en-IN');
   const newRow = `
+<<<<<<< HEAD
       <tr>
           <td>${itemValue}</td>
           <td><span class="category-badge">${categoryValue}</span></td>
@@ -45,5 +67,5 @@ function getData() {
   tableBody.innerHTML += newRow;
   itemInput.value = "";
   amountInput.value = "";
-  paidCheckbox.checked = false;
+  setStatus(true);
 }
