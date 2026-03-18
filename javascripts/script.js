@@ -1,13 +1,15 @@
 function getData(){
-    //taking values
-    let item = document.querySelector('.item-input');
-    let category = document.querySelector('#category-selector')
-    let amount = document.querySelector('.amount-input')
+    // Taking Inserted Values From the Table
+    const itemInput = document.querySelector(".item-input");
+    const categorySelector = document.querySelector("#category-selector");
+    const amountInput = document.querySelector(".amount-input");
+    const paidCheckbox = document.querySelector("#paid-check");
 
-    // storing values
-    let itemValue = item.value;
-    let categoryValue = category.value;
-    let amountValue = amount.value;
+    // Storing Values
+    const itemValue = itemInput.value;
+    const categoryValue = categorySelector.value;
+    const amountValue = amountInput.value;
+    const isPaid = paidCheckbox.checked;
 
     if (itemValue == null || categoryValue === "default" || amountValue === "$") 
     {
@@ -16,11 +18,23 @@ function getData(){
     }
 
   const tableBody = document.querySelector("#viewInsertedData");
-  tableBody.innerHTML += `
-    <tr>
-      <td>${itemValue}</td>
-      <td>${categoryValue}</td>
-      <td>$${amountValue}</td>
-    </tr>
+  // Create the row with badge HTML
+  const newRow = `
+      <tr>
+          <td>${itemValue}</td>
+          <td><span class="category-badge">${categoryValue}</span></td>
+          <td class="amount-text">₹${amountValue}</td>
+          <td>
+              <span class="paid-status ${isPaid ? 'status-yes' : 'status-no'}">
+                  ${isPaid ? 'YES' : 'NO'}
+              </span>
+          </td>
+          <td>${new Date().toLocaleDateString('en-GB')}</td>
+      </tr>
   `;
+
+  tableBody.innerHTML += newRow;
+  itemInput.value = "";
+  amountInput.value = "";
+  paidCheckbox.checked = false;
 }
