@@ -13,8 +13,14 @@ function getData() {
   const amountValue = amountInput.value;
   const isPaid = paidCheckbox.checked;
 
-  if (itemValue == null || categoryValue === "default" || amountValue === "$") {
+  if (itemValue === "" || amountValue === "") {
     alert("Please fill the fields below to enter");
+    return;
+  }
+
+  if (amountValue < 0) {
+    alert("Enter a valid amount and continue");
+    amountInput.value = "";
     return;
   }
 
