@@ -1,17 +1,18 @@
-const date = new Date().toLocaleDateString("en-GB");
+let total = 0;
 
 function getData() {
-  //taking values
-  let item = document.querySelector(".item-input");
-  let category = document.querySelector("#category-selector");
-  let amount = document.querySelector(".amount-input");
+  // Taking Inserted Values From the Table
+  const itemInput = document.querySelector(".item-input");
+  const categorySelector = document.querySelector("#category-selector");
+  const amountInput = document.querySelector(".amount-input");
+  const paidCheckbox = document.querySelector("#paid-check");
 
-  // storing values
-  let itemValue = item.value;
-  let categoryValue = category.value;
-  let amountValue = amount.value;
+  // Storing Values
+  const itemValue = itemInput.value;
+  const categoryValue = categorySelector.value;
+  const amountValue = amountInput.value;
+  const isPaid = paidCheckbox.checked;
 
-  //checking if value empty
   if (itemValue == null || categoryValue === "default" || amountValue === "$") {
     alert("Please fill the fields below to enter");
     return;
@@ -19,17 +20,30 @@ function getData() {
 
   //getting output table
   const tableBody = document.querySelector("#viewInsertedData");
+  // Create the row with badge HTML
+  const newRow = `
+      <tr>
+          <td>${itemValue}</td>
+          <td><span class="category-badge">${categoryValue}</span></td>
+          <td class="amount-text">₹${amountValue}</td>
+          <td>
+              <span class="paid-status ${isPaid ? "status-yes" : "status-no"}">
+                  ${isPaid ? "YES" : "NO"}
+              </span>
+          </td>
+          <td>${new Date().toLocaleDateString("en-GB")}</td>
+      </tr>
+  `;
 
-  //updating output table
-  tableBody.innerHTML += `<tr>
-    <td>${itemValue}</td>
-    <td>${categoryValue}</td>
-    <td>$${amountValue}</td>
-    <td>${date}</td>
-    </tr>`;
+  //displaying the total expenditure
+  if (paidCheckbox.checked == true) {
+    total += Number(amountInput.value);
+    document.querySelector("#total-amount").textContent = "₹" + total;
+  }
 
-  //clearing the input box
-  item.value = "";
-  category.value = "default";
-  amount.value = "";
+  //clearing the input boxes
+  tableBody.innerHTML += newRow;
+  itemInput.value = "";
+  amountInput.value = "";
+  paidCheckbox.checked = false;
 }
