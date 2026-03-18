@@ -34,12 +34,18 @@ function getData() {
   const amountValue = amountInput.value;
   const isPaid = statusHiddenValue === "true";
 
-  // Validation
-  if (!itemValue || !amountValue || amountValue <= 0) {
-    alert("Please provide a valid item name and amount.");
+  if (itemValue === "" || amountValue === "") {
+    alert("Please fill the fields below to enter");
     return;
   }
 
+  if (amountValue < 0) {
+    alert("Enter a valid amount and continue");
+    amountInput.value = "";
+    return;
+  }
+
+  //getting output table
   const tableBody = document.querySelector("#viewInsertedData");
 
   // Formatting amount to look professional (e.g., ₹2,000)

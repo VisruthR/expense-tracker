@@ -259,9 +259,20 @@ tr td:last-child {
   .content-grid {
     grid-template-columns: 1fr;
   }
+
+  .main-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
 }
 
-/* 1. Firefox Support (Applies to all elements) */
+.display-card {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+/* --- ScrollBar --- */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.02);
@@ -288,104 +299,4 @@ tr td:last-child {
   background-color: #0ea5e9;
 }
 
-#switch-elements {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
 
-/* Remove bottom margin from the title inside the flex container to keep it vertically centered */
-#switch-elements .section-title {
-  margin-bottom: 0;
-}
-
-.switch-btn,
-.switch-btn-switched {
-  background: rgba(2, 6, 23, 0.4);
-  color: var(--accent-color);
-  border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  height: 36px;
-  width: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition:
-  transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
-  box-shadow 0.3s ease;
-}
-
-.switch-btn-switched {
-  background: var(--accent-color);
-  color: var(--bg-color);
-}
-
-/* Hover State */
-.switch-btn:hover {
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-
-.switch-btn-switched:hover {
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-
-.switch-btn:active,
-.switch-btn-switched:active {
-  transform: rotate(180deg) scale(0.95);
-}
-
-/* --- Switched Card Info Boxes --- */
-
-span.form-controls {
-  display: flex;
-  align-items: center;
-  min-height: 42px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-
-#switched-total {
-  color: var(--danger);
-  background: rgba(239, 68, 68, 0.05);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-#switched-balence {
-  color: var(--success);
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-#submit-info-btn {
-  transition: all 0.3s ease;
-}
-
-#submit-info-btn:hover {
-  box-shadow: 0 0 15px var(--accent-glow);
-  transform: translateY(-2px);
-}
-
-.input-card-switched {
-  display: flex;
-  flex-direction: column;
-}
-
-#switched-total-label {
-  margin-top: 40px;
-}
-
-#switched-budget-label {
-  margin-top: 40px;
-}
-
-.input-card-switched .form-group:last-of-type {
-  margin-top: 40px;
-}
-
-.switched-submit {
-  margin-top: 27px;
-}
