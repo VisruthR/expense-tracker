@@ -9,5 +9,18 @@ function getData(){
     let categoryValue = category.value;
     let amountValue = amount.value;
 
-    let tableBody = document.querySelector('#viewInsertedData')
+    if (itemValue == null || categoryValue === "default" || amountValue === "$") 
+    {
+      alert("Please fill the fields below to enter");
+      return;
+    }
+
+  const tableBody = document.querySelector("#viewInsertedData");
+  tableBody.innerHTML += `
+    <tr>
+      <td>${itemValue}</td>
+      <td>${categoryValue}</td>
+      <td>$${amountValue}</td>
+    </tr>
+  `;
 }
