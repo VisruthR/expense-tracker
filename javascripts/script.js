@@ -37,13 +37,11 @@ function getData() {
     alert("Please provide a valid item name and amount.");
     return;
   }
->>>>>>> d42fbad (change: color of the read button changed)
 
   //getting output table
   const tableBody = document.querySelector("#viewInsertedData");
   const formattedAmount = parseFloat(amountValue).toLocaleString('en-IN');
   const newRow = `
-<<<<<<< HEAD
       <tr>
           <td>${itemValue}</td>
           <td><span class="category-badge">${categoryValue}</span></td>
