@@ -7,6 +7,7 @@ const hiddenInput = document.getElementById("paid-status-hidden");
 const trackerPage = document.querySelector(".input-card");
 const indexPage = document.querySelector(".input-card-switched");
 
+<<<<<<< HEAD
 function setStatus(isPaid) {
   if (isPaid) {
     btnYes.classList.add("active");
@@ -17,6 +18,22 @@ function setStatus(isPaid) {
     btnYes.classList.remove("active");
     hiddenInput.value = "false";
   }
+=======
+    if (itemValue == null || categoryValue === "default" || amountValue === "$") 
+    {
+      alert("Please fill the fields below to enter");
+      return;
+    }
+
+  const tableBody = document.querySelector("#viewInsertedData");
+  tableBody.innerHTML += `
+    <tr>
+      <td>${itemValue}</td>
+      <td>${categoryValue}</td>
+      <td>$${amountValue}</td>
+    </tr>
+  `;
+>>>>>>> d25fa10 (feat: Displaying added items again changed)
 }
 
 btnYes.addEventListener("click", () => setStatus(true));
