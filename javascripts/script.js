@@ -1,12 +1,20 @@
 let total = 0;
 
-// --- 1. Toggle Button Selection Logic ---
+// DOM Elements
 const btnYes = document.getElementById("btn-yes");
 const btnNo = document.getElementById("btn-no");
 const hiddenInput = document.getElementById("paid-status-hidden");
 const trackerPage = document.querySelector(".input-card");
 const indexPage = document.querySelector(".input-card-switched");
+const balanceEl = document.querySelector("#switched-balence");
+const initialSwitchBtn = document.querySelector(".switch-btn");
+const finalSwitchBtn = document.querySelector(".switch-btn-switched");
+const budget = document.querySelector("#budget-input");
+const submitInfo = document.querySelector("#submit-info-btn");
+const headerLabel = document.querySelector(".header-label");
+const totalDisplay = document.querySelector("#total-amount");
 
+// --- 1. Toggle Logic ---
 function setStatus(isPaid) {
   if (isPaid) {
     btnYes.classList.add("active");
@@ -22,128 +30,79 @@ function setStatus(isPaid) {
 btnYes.addEventListener("click", () => setStatus(true));
 btnNo.addEventListener("click", () => setStatus(false));
 
-// --- 2. Main Logic to Add Transactions ---
+// --- 2. Data Entry Logic ---
 function getData() {
-  const itemInput = document.querySelector("#item-input");
+  const itemInput = document.querySelector(".item-input");
   const categorySelector = document.querySelector("#category-selector");
-  const amountInput = document.querySelector("#amount-input");
-  const statusHiddenValue = document.getElementById("paid-status-hidden").value;
+  const amountInput = document.querySelector(".amount-input");
 
   const itemValue = itemInput.value.trim();
-  const categoryValue = categorySelector.value;
-  const amountValue = amountInput.value;
-  const isPaid = statusHiddenValue === "true";
+  const amountValue = parseFloat(amountInput.value);
+  const isPaid = hiddenInput.value === "true";
 
-  if (itemValue === "" || amountValue === "") {
-    alert("Please fill the fields below to enter");
+  if (!itemValue || isNaN(amountValue) || amountValue <= 0) {
+    alert("Please provide a valid item name and amount.");
     return;
   }
 
-  if (amountValue < 0) {
-    alert("Enter a valid amount and continue");
-    amountInput.value = "";
-    return;
+  // Update Total if Paid
+  if (isPaid) {
+    total += amountValue;
+    totalDisplay.textContent = "₹" + total.toFixed(2);
   }
 
-  //getting output table
+  // Add Row to Table
   const tableBody = document.querySelector("#viewInsertedData");
-
-  // Formatting amount to look professional (e.g., ₹2,000)
-  const formattedAmount = parseFloat(amountValue).toLocaleString("en-IN");
-
   const newRow = `
         <tr>
             <td>${itemValue}</td>
-            <td><span class="category-badge">${categoryValue}</span></td>
-            <td class="amount-text">₹${formattedAmount}</td>
-            <td>
-                <span class="paid-status ${isPaid ? "status-yes" : "status-no"}">
-                    ${isPaid ? "YES" : "NO"}
-                </span>
-            </td>
+            <td><span class="category-badge">${categorySelector.value}</span></td>
+            <td class="amount-text">₹${amountValue.toLocaleString("en-IN")}</td>
+            <td><span class="paid-status ${isPaid ? "status-yes" : "status-no"}">${isPaid ? "YES" : "NO"}</span></td>
             <td>${new Date().toLocaleDateString("en-GB")}</td>
         </tr>
     `;
-
-  //set total spendings
-  if (isPaid) {
-    total += Number(amountInput.value);
-    document.querySelector("#total-amount").textContent = "₹" + total;
-  }
-
-  // Add to table
   tableBody.innerHTML += newRow;
 
-  // --- Reset Form Fields ---
+  // Reset
   itemInput.value = "";
   amountInput.value = "";
-  // Reset toggle to 'Yes' as default
   setStatus(true);
 }
 
-//page switching logic
-function switchPage(currentPage) {
+// --- 3. Switching & Balance Logic ---
+function switchPage(pageToShow) {
   trackerPage.style.display = "none";
   indexPage.style.display = "none";
-
-  currentPage.style.display = "block";
+  pageToShow.style.display = "block";
 }
-
-
-const balanceEl = document.querySelector("#switched-balence");
-const initialSwitchBtn = document.querySelector(".switch-btn");
-const finalSwitchBtn = document.querySelector(".switch-btn-switched");
-const budget = document.querySelector("#budget-input");
-const submitInfo = document.querySelector("#submit-info-btn");
-const headerLabel = document.querySelector(".header-label");
 
 function updateBalanceColors(balance) {
   if (!budget.value || balance >= 0) {
-    balanceEl.style.backgroundColor = "rgba(16, 185, 129, 0.05)";
-    balanceEl.style.border = "1px solid rgba(16, 185, 129, 0.2)";
     balanceEl.style.color = "var(--success)";
   } else {
-    balanceEl.style.backgroundColor = "rgba(239, 68, 68, 0.05)";
-    balanceEl.style.border = "1px solid rgba(239, 68, 68, 0.2)";
     balanceEl.style.color = "var(--danger)";
   }
 }
 
 initialSwitchBtn.addEventListener("click", () => {
   switchPage(indexPage);
+  headerLabel.textContent = "Balance";
+  document.querySelector("#switched-total").textContent = "₹" + total.toFixed(2);
 
   const currentBalance = parseFloat(budget.value || 0) - total;
-
-  document.querySelector("#switched-total").textContent = "₹" + total;
-  headerLabel.textContent = "Balence";
-
-  if (budget.value) {
-    balanceEl.textContent = "₹" + currentBalance;
-    document.querySelector("#total-amount").textContent = "₹" + currentBalance;
-  } else {
-    document.querySelector("#total-amount").textContent = "₹" + "0.00";
-    balanceEl.textContent = "";
-  }
-
-  updateBalanceColors(currentBalance)
-
+  balanceEl.textContent = budget.value ? "₹" + currentBalance.toFixed(2) : "Set Budget First";
+  updateBalanceColors(currentBalance);
 });
 
 finalSwitchBtn.addEventListener("click", () => {
   switchPage(trackerPage);
   headerLabel.textContent = "Total Spendings";
-  if (!total) {
-    document.querySelector("#total-amount").textContent = "₹" + "0.00";
-  } else {
-    document.querySelector("#total-amount").textContent = "₹" + total;
-  }
+  totalDisplay.textContent = "₹" + total.toFixed(2);
 });
 
 submitInfo.addEventListener("click", () => {
   const currentBalance = parseFloat(budget.value || 0) - total;
-
-  balanceEl.textContent = "₹" + currentBalance;
-  document.querySelector("#total-amount").textContent = "₹" + currentBalance;
-
-  updateBalanceColors(currentBalance)
+  balanceEl.textContent = "₹" + currentBalance.toFixed(2);
+  updateBalanceColors(currentBalance);
 });
