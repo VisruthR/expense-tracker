@@ -95,7 +95,7 @@ function updateBalanceColors(balance) {
   if (!budget.value || balance >= 0) {
     balanceEl.style.backgroundColor = "rgba(16, 185, 129, 0.05)";
     balanceEl.style.border = "1px solid rgba(16, 185, 129, 0.2)";
-    balanceEl.style.color = "var(--success)"; 
+    balanceEl.style.color = "var(--success)";
   } else {
     balanceEl.style.backgroundColor = "rgba(239, 68, 68, 0.05)";
     balanceEl.style.border = "1px solid rgba(239, 68, 68, 0.2)";
@@ -105,12 +105,12 @@ function updateBalanceColors(balance) {
 
 initialSwitchBtn.addEventListener("click", () => {
   switchPage(indexPage);
-  
+
   const currentBalance = parseFloat(budget.value || 0) - total;
 
   document.querySelector("#switched-total").textContent = "₹" + total;
   headerLabel.textContent = "Balence";
-  
+
   if (budget.value) {
     balanceEl.textContent = "₹" + currentBalance;
     document.querySelector("#total-amount").textContent = "₹" + currentBalance;
@@ -120,7 +120,7 @@ initialSwitchBtn.addEventListener("click", () => {
   }
 
   updateBalanceColors(currentBalance)
- 
+
 });
 
 finalSwitchBtn.addEventListener("click", () => {
@@ -138,6 +138,6 @@ submitInfo.addEventListener("click", () => {
 
   balanceEl.textContent = "₹" + currentBalance;
   document.querySelector("#total-amount").textContent = "₹" + currentBalance;
-  
+
   updateBalanceColors(currentBalance)
 });
