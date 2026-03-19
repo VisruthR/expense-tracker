@@ -4,6 +4,8 @@ let total = 0;
 const btnYes = document.getElementById("btn-yes");
 const btnNo = document.getElementById("btn-no");
 const hiddenInput = document.getElementById("paid-status-hidden");
+const trackerPage = document.querySelector(".input-card");
+const indexPage = document.querySelector(".input-card-switched");
 
 function setStatus(isPaid) {
   if (isPaid) {
@@ -73,9 +75,6 @@ function getData() {
   setStatus(true);
 }
 
-const trackerPage = document.querySelector(".input-card");
-const indexPage = document.querySelector(".input-card-switched");
-
 //page switching logic
 function switchPage(currentPage) {
   trackerPage.style.display = "none";
@@ -84,21 +83,61 @@ function switchPage(currentPage) {
   currentPage.style.display = "block";
 }
 
+
+const balanceEl = document.querySelector("#switched-balence");
 const initialSwitchBtn = document.querySelector(".switch-btn");
 const finalSwitchBtn = document.querySelector(".switch-btn-switched");
 const budget = document.querySelector("#budget-input");
 const submitInfo = document.querySelector("#submit-info-btn");
+const headerLabel = document.querySelector(".header-label");
+
+function updateBalanceColors(balance) {
+  if (!budget.value || balance >= 0) {
+    balanceEl.style.backgroundColor = "rgba(16, 185, 129, 0.05)";
+    balanceEl.style.border = "1px solid rgba(16, 185, 129, 0.2)";
+    balanceEl.style.color = "var(--success)"; 
+  } else {
+    balanceEl.style.backgroundColor = "rgba(239, 68, 68, 0.05)";
+    balanceEl.style.border = "1px solid rgba(239, 68, 68, 0.2)";
+    balanceEl.style.color = "var(--danger)";
+  }
+}
 
 initialSwitchBtn.addEventListener("click", () => {
   switchPage(indexPage);
+  
+  const currentBalance = parseFloat(budget.value || 0) - total;
+
   document.querySelector("#switched-total").textContent = "₹" + total;
+  headerLabel.textContent = "Balence";
+  
+  if (budget.value) {
+    balanceEl.textContent = "₹" + currentBalance;
+    document.querySelector("#total-amount").textContent = "₹" + currentBalance;
+  } else {
+    document.querySelector("#total-amount").textContent = "₹" + "0.00";
+    balanceEl.textContent = "";
+  }
+
+  updateBalanceColors(currentBalance)
+ 
 });
 
 finalSwitchBtn.addEventListener("click", () => {
   switchPage(trackerPage);
+  headerLabel.textContent = "Total Spendings";
+  if (!total) {
+    document.querySelector("#total-amount").textContent = "₹" + "0.00";
+  } else {
+    document.querySelector("#total-amount").textContent = "₹" + total;
+  }
 });
 
 submitInfo.addEventListener("click", () => {
-  document.querySelector("#switched-balence").textContent =
-    "₹" + (parseFloat(budget.value) - total);
+  const currentBalance = parseFloat(budget.value || 0) - total;
+
+  balanceEl.textContent = "₹" + currentBalance;
+  document.querySelector("#total-amount").textContent = "₹" + currentBalance;
+  
+  updateBalanceColors(currentBalance)
 });
