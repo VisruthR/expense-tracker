@@ -93,7 +93,7 @@ body {
 .input-card,
 .input-card-switched,
 .display-card {
-  height: 52vh;
+  height: 100%;
   overflow: auto;
   background: var(--card-bg);
   backdrop-filter: blur(16px);
