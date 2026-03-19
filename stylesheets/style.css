@@ -93,7 +93,7 @@ body {
 .input-card,
 .input-card-switched,
 .display-card {
-  height: 52vh;
+  height: 50%;
   overflow: auto;
   background: var(--card-bg);
   backdrop-filter: blur(16px);
@@ -102,10 +102,6 @@ body {
   padding: 2rem;
 }
 
-.input-card,
-.input-card-switched {
-  overflow: hidden;
-}
 
 .section-title {
   font-size: 1rem;
@@ -200,11 +196,13 @@ body {
   width: 100%;
   overflow-x: auto;
 }
+
 table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 12px;
 }
+
 th {
   padding: 12px;
   text-align: left;
@@ -212,13 +210,16 @@ th {
   color: var(--text-dim);
   text-transform: uppercase;
 }
+
 tr td {
   background: rgba(255, 255, 255, 0.02);
   padding: 16px 12px;
 }
+
 tr td:first-child {
   border-radius: 12px 0 0 12px;
 }
+
 tr td:last-child {
   border-radius: 0 12px 12px 0;
 }
@@ -243,6 +244,7 @@ tr td:last-child {
   background: rgba(16, 185, 129, 0.2);
   color: #10b981;
 }
+
 .status-no {
   background: rgba(239, 68, 68, 0.2);
   color: #f43f5e;
@@ -312,8 +314,8 @@ tr td:last-child {
   font-size: 1.2rem;
   cursor: pointer;
   transition:
-    transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease;
+  transform 1.5s cubic-bezier(0.22, 1, 0.36, 1),
+  box-shadow 0.3s ease;
 }
 
 .switch-btn-switched {
@@ -376,12 +378,12 @@ span.form-controls {
   margin-top: 40px;
 }
 
-#switched-budget-label{
-	margin-top: 40px;
+#switched-budget-label {
+  margin-top: 40px;
 }
 
 .input-card-switched .form-group:last-of-type {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 
 .switched-submit {
