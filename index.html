@@ -1,134 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lorahk's Expense | Premium Glass UI</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="stylesheets/style.css">
+  <title>Lorahk's Expense</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+  <div class="dashboard-container">
+    
+    <header class="main-header">
+      <div class="logo-area">
+        <i class="fa-solid fa-layer-group"></i>
+        <h1 class="heading-main">LORAHK'S <span>EXPENSE</span></h1>
+      </div>
+      <div class="stat-pill">
+        <span class="label">Available Balance</span>
+        <span class="value">₹ 0.00</span>
+      </div>
+    </header>
 
-  <div class="container py-5">
-    <div class="main-glass-shell p-4 p-md-5">
-      <header class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
-        <div class="brand">
-          <i class="bi bi-layers-half me-2"></i>
-          <span>LORAHK'S <span class="fw-light">EXPENSE</span></span>
-        </div>
-        <div class="balance-card">
-          <p class="m-0 text-muted small">Available Balance</p>
-          <h2 class="m-0 fw-bold" id="total-spends-value">₹ 0.00</h2>
-        </div>
-      </header>
-
-      <div class="row g-5">
-        <div class="col-lg-4">
-          <section class="action-section">
-            <h5 class="section-title"><i class="bi bi-plus-square-dotted me-2"></i>Create Entry</h5>
-            <form id="transaction-form" class="mt-4">
-              <div class="glass-input-wrapper mb-3">
-                <label>What for?</label>
-                <input type="text" id="item-name" placeholder="Subscription, Grocery..." required>
-              </div>
-
-              <div class="row g-2 mb-3">
-                <div class="col-6">
-                  <div class="glass-input-wrapper">
-                    <label>Category</label>
-                    <select id="item-category">
-                      <option value="General">General</option>
-                      <option value="Food">Food</option>
-                      <option value="Salary">Salary</option>
-                      <option value="Tech">Tech</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-6">
-                  <div class="glass-input-wrapper">
-                    <label>Amount</label>
-                    <input type="number" id="item-amount" placeholder="0.00" required>
-                  </div>
-                </div>
-              </div>
-
-              <div class="status-selector mb-4">
-                <input type="radio" name="item-paid-status" id="status-paid" value="Paid" checked>
-                <label for="status-paid" class="status-btn">Expense</label>
-
-                <input type="radio" name="item-paid-status" id="status-received" value="Received">
-                <label for="status-received" class="status-btn">Income</label>
-              </div>
-
-              <button type="submit" class="btn-glow-primary w-100" id="form-submit-btn">
-                Confirm Transaction
-              </button>
-            </form>
-
-            <div class="tool-belt mt-5">
-              <button class="tool-link" id="export-json-btn"><i class="bi bi-download"></i></button>
-              <button class="tool-link" id="export-csv-btn"><i class="bi bi-file-spreadsheet"></i></button>
-              <button class="tool-link delete" id="wipe-data-btn"><i class="bi bi-trash3"></i></button>
-            </div>
-          </section>
+    <main class="content-grid">
+      
+      <section class="input-card">
+        <h2 class="section-title"><i class="fa-regular fa-square-plus"></i> Create Entry</h2>
+        
+        <div class="form-group">
+          <label>What For?</label>
+          <input type="text" class="form-controls" placeholder="Subscription, Grocery...">
         </div>
 
-        <div class="col-lg-8">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="section-title"><i class="bi bi-lightning-charge me-2"></i>Live Stream</h5>
-            <select id="filter-type" class="mini-select">
-              <option value="all">Everything</option>
-              <option value="expense">Spent</option>
-              <option value="income">Earned</option>
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label>Category</label>
+            <select class="form-controls">
+              <option>General</option>
+              <option>Food</option>
+              <option>Bills</option>
             </select>
           </div>
-
-          <div class="activity-feed" id="activity-list">
+          <div class="form-group half-width">
+            <label>Amount</label>
+            <input type="number" class="form-controls" placeholder="0.00">
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row g-4">
-    <div class="col-lg-4">
-      <div class="glass-sub-card mt-4 p-3 text-center">
-        <h6 class="section-title mb-3"><i class="bi bi-pie-chart me-2"></i>Insights</h6>
-        <canvas id="expenseChart" width="200" height="200"></canvas>
-      </div>
-    </div>
 
-    <div class="col-lg-8">
-      <div class="glass-search-bar mb-4">
-        <i class="bi bi-search"></i>
-        <input type="text" id="main-search" placeholder="Search transactions (e.g. 'MacBook')...">
-      </div>
+        <div class="form-group">
+          <div class="status-toggle-group">
+            <button class="toggle-btn">Expense</button>
+            <button class="toggle-btn active">Income</button>
+          </div>
+        </div>
 
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="section-title"><i class="bi bi-lightning-charge me-2"></i>Live Stream</h5>
-        <div class="d-flex gap-2">
-          <select id="filter-type" class="mini-select">
-            <option value="all">All</option>
-            <option value="expense">Spent</option>
-            <option value="income">Earned</option>
+        <button class="submit-button">Confirm Transaction</button>
+
+        <div class="action-buttons">
+          <button class="icon-btn"><i class="fa-solid fa-download"></i></button>
+          <button class="icon-btn"><i class="fa-solid fa-calculator"></i></button>
+          <button class="icon-btn"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      </section>
+
+      <section class="display-card">
+        <div class="stream-header">
+          <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Live Stream</h2>
+          <select class="form-controls dropdown-small">
+            <option>Everything</option>
+            <option>Income</option>
+            <option>Expense</option>
           </select>
         </div>
-      </div>
+        
+        <div class="stream-content">
+          </div>
+      </section>
 
-      <div class="activity-feed custom-scrollbar" id="activity-list">
-      </div>
-    </div>
+    </main>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="javascripts/script.js"></script>
 </body>
-
 </html>
