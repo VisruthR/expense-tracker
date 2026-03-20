@@ -1,143 +1,102 @@
-let total = 0;
+// ... [Keep your loadTransactions and calculateTotals functions from before] ...
 
-// --- 1. Toggle Button Selection Logic ---
-const btnYes = document.getElementById("btn-yes");
-const btnNo = document.getElementById("btn-no");
-const hiddenInput = document.getElementById("paid-status-hidden");
-const trackerPage = document.querySelector(".input-card");
-const indexPage = document.querySelector(".input-card-switched");
+function renderTransactions() {
+  const filterValue = $('#filter-type').val();
+  const $activityList = $('#activity-list');
+  $activityList.empty();
 
-function setStatus(isPaid) {
-  if (isPaid) {
-    btnYes.classList.add("active");
-    btnNo.classList.remove("active");
-    hiddenInput.value = "true";
-  } else {
-    btnNo.classList.add("active");
-    btnYes.classList.remove("active");
-    hiddenInput.value = "false";
-  }
-}
+  const filtered = transactions.filter(t => {
+    if (filterValue === 'expense') return !t.isIncome;
+    if (filterValue === 'income') return t.isIncome;
+    return true;
+  });
 
-btnYes.addEventListener("click", () => setStatus(true));
-btnNo.addEventListener("click", () => setStatus(false));
-
-// --- 2. Main Logic to Add Transactions ---
-function getData() {
-  const itemInput = document.querySelector("#item-input");
-  const categorySelector = document.querySelector("#category-selector");
-  const amountInput = document.querySelector("#amount-input");
-  const statusHiddenValue = document.getElementById("paid-status-hidden").value;
-
-  const itemValue = itemInput.value.trim();
-  const categoryValue = categorySelector.value;
-  const amountValue = amountInput.value;
-  const isPaid = statusHiddenValue === "true";
-
-  // Validation
-  if (!itemValue || !amountValue || amountValue <= 0) {
-    alert("Please provide a valid item name and amount.");
+  if (filtered.length === 0) {
+    $activityList.append('<div class="text-center p-5 opacity-50">No activity yet. Time to spend?</div>');
     return;
   }
 
-  const tableBody = document.querySelector("#viewInsertedData");
+  filtered.forEach(t => {
+    const amountDisplay = t.isIncome ? `+₹${t.amount}` : `-₹${t.amount}`;
+    const colorClass = t.isIncome ? 'text-success' : 'text-danger';
+    const icon = t.isIncome ? 'bi-plus-circle' : 'bi-dash-circle';
 
-  // Formatting amount to look professional (e.g., ₹2,000)
-  const formattedAmount = parseFloat(amountValue).toLocaleString("en-IN");
-
-  const newRow = `
-        <tr>
-            <td>${itemValue}</td>
-            <td><span class="category-badge">${categoryValue}</span></td>
-            <td class="amount-text">₹${formattedAmount}</td>
-            <td>
-                <span class="paid-status ${isPaid ? "status-yes" : "status-no"}">
-                    ${isPaid ? "YES" : "NO"}
-                </span>
-            </td>
-            <td>${new Date().toLocaleDateString("en-GB")}</td>
-        </tr>
-    `;
-
-  //set total spendings
-  if (isPaid) {
-    total += Number(amountInput.value);
-    document.querySelector("#total-amount").textContent = "₹" + total;
-  }
-
-  // Add to table
-  tableBody.innerHTML += newRow;
-
-  // --- Reset Form Fields ---
-  itemInput.value = "";
-  amountInput.value = "";
-  // Reset toggle to 'Yes' as default
-  setStatus(true);
-}
-
-//page switching logic
-function switchPage(currentPage) {
-  trackerPage.style.display = "none";
-  indexPage.style.display = "none";
-
-  currentPage.style.display = "block";
+    const card = `
+            <div class="activity-card">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 fs-3 ${colorClass}"><i class="bi ${icon}"></i></div>
+                    <div>
+                        <h6 class="m-0 fw-bold">${t.name}</h6>
+                        <span class="badge bg-dark border border-secondary" style="font-size: 0.6rem;">${t.category}</span>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <h5 class="m-0 fw-bold ${colorClass}">${amountDisplay}</h5>
+                    <div class="mt-2">
+                        <i class="bi bi-pencil-square me-2 opacity-50 edit-icon" data-id="${t.id}" role="button"></i>
+                        <i class="bi bi-trash3 text-danger opacity-50 delete-icon" data-id="${t.id}" role="button"></i>
+                    </div>
+                </div>
+            </div>
+        `;
+    $activityList.append(card);
+  });
 }
 
 
-const balanceEl = document.querySelector("#switched-balence");
-const initialSwitchBtn = document.querySelector(".switch-btn");
-const finalSwitchBtn = document.querySelector(".switch-btn-switched");
-const budget = document.querySelector("#budget-input");
-const submitInfo = document.querySelector("#submit-info-btn");
-const headerLabel = document.querySelector(".header-label");
+let myChart;
 
-function updateBalanceColors(balance) {
-  if (!budget.value || balance >= 0) {
-    balanceEl.style.backgroundColor = "rgba(16, 185, 129, 0.05)";
-    balanceEl.style.border = "1px solid rgba(16, 185, 129, 0.2)";
-    balanceEl.style.color = "var(--success)"; 
-  } else {
-    balanceEl.style.backgroundColor = "rgba(239, 68, 68, 0.05)";
-    balanceEl.style.border = "1px solid rgba(239, 68, 68, 0.2)";
-    balanceEl.style.color = "var(--danger)";
-  }
+// Initialize Chart.js
+function updateChart() {
+  const ctx = document.getElementById('expenseChart').getContext('2d');
+
+  // Group totals by category
+  const categories = [...new Set(transactions.map(t => t.category))];
+  const data = categories.map(cat => {
+    return transactions
+      .filter(t => t.category === cat && !t.isIncome)
+      .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+  });
+
+  if (myChart) myChart.destroy();
+
+  myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: categories,
+      datasets: [{
+        data: data,
+        backgroundColor: ['#38bdf8', '#818cf8', '#c084fc', '#fb7185', '#34d399'],
+        borderWidth: 0,
+        hoverOffset: 10
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      cutout: '80%'
+    }
+  });
 }
 
-initialSwitchBtn.addEventListener("click", () => {
-  switchPage(indexPage);
-  
-  const currentBalance = parseFloat(budget.value || 0) - total;
-
-  document.querySelector("#switched-total").textContent = "₹" + total;
-  headerLabel.textContent = "Balence";
-  
-  if (budget.value) {
-    balanceEl.textContent = "₹" + currentBalance;
-    document.querySelector("#total-amount").textContent = "₹" + currentBalance;
-  } else {
-    document.querySelector("#total-amount").textContent = "₹" + "0.00";
-    balanceEl.textContent = "";
-  }
-
-  updateBalanceColors(currentBalance)
- 
+// Search Logic
+$('#main-search').on('input', function () {
+  const query = $(this).val().toLowerCase();
+  renderTransactions(query);
 });
 
-finalSwitchBtn.addEventListener("click", () => {
-  switchPage(trackerPage);
-  headerLabel.textContent = "Total Spendings";
-  if (!total) {
-    document.querySelector("#total-amount").textContent = "₹" + "0.00";
-  } else {
-    document.querySelector("#total-amount").textContent = "₹" + total;
-  }
-});
+// Update render function to accept search
+function renderTransactions(searchQuery = "") {
+  const filterValue = $('#filter-type').val();
+  const $activityList = $('#activity-list');
+  $activityList.empty();
 
-submitInfo.addEventListener("click", () => {
-  const currentBalance = parseFloat(budget.value || 0) - total;
+  const filtered = transactions.filter(t => {
+    const matchesFilter = (filterValue === 'all' || (filterValue === 'expense' ? !t.isIncome : t.isIncome));
+    const matchesSearch = t.name.toLowerCase().includes(searchQuery);
+    return matchesFilter && matchesSearch;
+  });
 
-  balanceEl.textContent = "₹" + currentBalance;
-  document.querySelector("#total-amount").textContent = "₹" + currentBalance;
-  
-  updateBalanceColors(currentBalance)
-});
+  // ... loop through filtered and append activity cards (from previous design) ...
+
+  updateChart(); // Update visual insights whenever list changes
+}
