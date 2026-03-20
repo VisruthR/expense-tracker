@@ -2,13 +2,14 @@
 
 :root {
   /* Neobrutalist Theme */
-  --bg-color: #fdf5e6; 
+  --bg-color: #fdf5e6;
   --card-bg: #ffffff;
-  --accent-color: #00e5ff; /* Cyan - matching your original blue vibe but brutal */
+  --accent-color: #00e5ff;
+  /* Cyan - matching your original blue vibe but brutal */
   --text-main: #000000;
-  --success: #00e676; 
-  --danger: #ff1744; 
-  
+  --success: #00e676;
+  --danger: #ff1744;
+
   --brutal-border: 3px solid #000000;
   --brutal-shadow: 6px 6px 0px #000000;
   --brutal-shadow-hover: 2px 2px 0px #000000;
@@ -78,13 +79,15 @@ body {
 }
 
 .stat-pill {
-  background: #ffe600; /* Bright yellow */
+  background: #ffe600;
+  /* Bright yellow */
   border: var(--brutal-border);
   box-shadow: var(--brutal-shadow-sm);
   padding: 8px 24px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Align right to match image */
+  align-items: flex-end;
+  /* Align right to match image */
   transform: rotate(1deg);
 }
 
@@ -142,7 +145,8 @@ body {
   margin-bottom: 6px;
   font-weight: 800;
   text-transform: uppercase;
-  background: #ff3864; /* Hot Pink highlight */
+  background: #ff3864;
+  /* Hot Pink highlight */
   color: white;
   padding: 2px 8px;
   border: 2px solid #000;
@@ -194,7 +198,8 @@ body {
 }
 
 .toggle-btn.active {
-  background: var(--success); /* Green for income like your screenshot */
+  background: var(--success);
+  /* Green for income like your screenshot */
   color: #000;
 }
 
@@ -202,7 +207,8 @@ body {
 .submit-button {
   width: 100%;
   padding: 16px;
-  background: var(--accent-color); /* Cyan */
+  background: var(--accent-color);
+  /* Cyan */
   color: #000;
   border: var(--brutal-border);
   box-shadow: var(--brutal-shadow);
@@ -271,4 +277,153 @@ body {
   .content-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- Activity Cards --- */
+.activity-card {
+  background: white;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.activity-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 8px 8px 0px #000;
+}
+
+.label-sticker {
+  display: inline-block;
+  color: #000;
+  padding: 2px 10px;
+  border: 2px solid #000;
+  font-weight: 900;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ff1744;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.text-success {
+  color: var(--success) !important;
+}
+
+.text-danger {
+  color: var(--danger) !important;
+}
+
+/* Target all selects or specific classes */
+.form-controls,
+.dropdown-small,
+select {
+  appearance: none;
+  /* Removes default browser arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #ffffff !important;
+  border: 3px solid #000000 !important;
+  border-radius: 0px !important;
+  /* Sharp corners */
+  box-shadow: 4px 4px 0px #000000 !important;
+  /* Hard shadow */
+
+  padding: 10px 40px 10px 15px !important;
+  font-weight: 800 !important;
+  cursor: pointer;
+
+  /* Add a custom brutalist arrow */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='square' stroke-linejoin='arcs'%3e%3cpath d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 18px !important;
+}
+
+.form-controls:focus {
+  outline: none;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000000 !important;
+}
+
+select {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 10px 15px !important;
+
+  /* Custom white arrow for dark mode */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 14px !important;
+}
+
+/* Fix for the dropdown options list background in some browsers */
+select option {
+  background-color: #0d1117;
+  /* Match your background color */
+  color: white;
+}
+
+/* Clean Reset for Dropdowns */
+select.form-controls, 
+select.dropdown-small {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: var(--brutal-border) !important;
+  border-radius: 0px !important; /* Forces sharp corners seen in Image 5 */
+  box-shadow: 4px 4px 0px #000000 !important;
+  
+  padding: 10px 40px 10px 15px !important;
+  font-family: inherit;
+  font-weight: 800 !important;
+  cursor: pointer;
+
+  /* Custom Brutalist Arrow (Black) */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='square' stroke-linejoin='arcs'%3e%3cpath d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 15px center !important;
+  background-size: 16px !important;
+  transition: 0.1s;
+}
+
+/* Fix the 'Everything' dropdown specifically */
+.dropdown-small {
+  background-color: #ffffff !important;
+  transform: rotate(-1deg); /* Subtle tilt to match the stat-pill aesthetic */
+}
+
+/* Fix for the dropdown options list (The Bug in Image 5) */
+select option {
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  padding: 10px;
+}
+
+/* Hover/Focus States */
+select.form-controls:hover,
+select.dropdown-small:hover {
+  transform: translate(-2px, -2px) rotate(0deg);
+  box-shadow: 6px 6px 0px #000000 !important;
 }

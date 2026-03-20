@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,10 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
   <div class="dashboard-container">
-    
+
     <header class="main-header">
       <div class="logo-area">
         <i class="fa-solid fa-layer-group"></i>
@@ -22,10 +24,10 @@
     </header>
 
     <main class="content-grid">
-      
+
       <section class="input-card">
         <h2 class="section-title"><i class="fa-regular fa-square-plus"></i> Create Entry</h2>
-        
+
         <div class="form-group">
           <label>What For?</label>
           <input type="text" class="form-controls" placeholder="Subscription, Grocery...">
@@ -55,6 +57,7 @@
 
         <button class="submit-button">Confirm Transaction</button>
 
+
         <div class="action-buttons">
           <button class="icon-btn"><i class="fa-solid fa-download"></i></button>
           <button class="icon-btn"><i class="fa-solid fa-calculator"></i></button>
@@ -71,12 +74,20 @@
             <option>Expense</option>
           </select>
         </div>
-        
+
         <div class="stream-content">
+          <div class="stream-content" id="activity-list">
+            <div class="empty-state text-center p-5">
+              <h3 style="opacity: 0.5;">No transactions recorded yet.</h3>
+            </div>
           </div>
+        </div>
       </section>
 
     </main>
   </div>
+
+  <script src="javascripts/script.js"></script>
 </body>
+
 </html>

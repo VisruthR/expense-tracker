@@ -1,102 +1,81 @@
-// ... [Keep your loadTransactions and calculateTotals functions from before] ...
+$(document).ready(function() {
+    let transactions = JSON.parse(localStorage.getItem('lorahk_data')) || [];
+    
+    const colors = {
+        Income: '#00e676',
+        Expense: '#ff1744',
+        General: '#00e5ff',
+        Food: '#ffee00',
+        Bills: '#ff3864',
+        Salary: '#ff9100'
+    };
 
-function renderTransactions() {
-  const filterValue = $('#filter-type').val();
-  const $activityList = $('#activity-list');
-  $activityList.empty();
+    // Toggle Button Logic (Expense/Income)
+    $('.toggle-btn').on('click', function() {
+        $('.toggle-btn').removeClass('active');
+        $(this).addClass('active');
+        
+        // Update Submit Button Theme
+        const status = $(this).text();
+        $('#submit-transaction').css('background-color', colors[status]);
+    });
 
-  const filtered = transactions.filter(t => {
-    if (filterValue === 'expense') return !t.isIncome;
-    if (filterValue === 'income') return t.isIncome;
-    return true;
-  });
+    function render() {
+        const filter = $('#filter-stream').val();
+        const $list = $('#activity-list');
+        $list.empty();
+        let balance = 0;
 
-  if (filtered.length === 0) {
-    $activityList.append('<div class="text-center p-5 opacity-50">No activity yet. Time to spend?</div>');
-    return;
-  }
+        const filtered = transactions.filter(t => {
+            if (filter === 'Income') return t.status === 'Income';
+            if (filter === 'Expense') return t.status === 'Expense';
+            return true;
+        });
 
-  filtered.forEach(t => {
-    const amountDisplay = t.isIncome ? `+₹${t.amount}` : `-₹${t.amount}`;
-    const colorClass = t.isIncome ? 'text-success' : 'text-danger';
-    const icon = t.isIncome ? 'bi-plus-circle' : 'bi-dash-circle';
+        filtered.forEach((t, index) => {
+            const isInc = t.status === 'Income';
+            balance += isInc ? parseFloat(t.amount) : -parseFloat(t.amount);
 
-    const card = `
-            <div class="activity-card">
-                <div class="d-flex align-items-center">
-                    <div class="me-3 fs-3 ${colorClass}"><i class="bi ${icon}"></i></div>
+            const card = `
+                <div class="activity-card" style="border-left: 10px solid ${colors[t.category] || '#000'}">
                     <div>
-                        <h6 class="m-0 fw-bold">${t.name}</h6>
-                        <span class="badge bg-dark border border-secondary" style="font-size: 0.6rem;">${t.category}</span>
+                        <span class="label-sticker" style="background:${colors[t.category]}">${t.category}</span>
+                        <h3 class="m-0">${t.name}</h3>
                     </div>
-                </div>
-                <div class="text-end">
-                    <h5 class="m-0 fw-bold ${colorClass}">${amountDisplay}</h5>
-                    <div class="mt-2">
-                        <i class="bi bi-pencil-square me-2 opacity-50 edit-icon" data-id="${t.id}" role="button"></i>
-                        <i class="bi bi-trash3 text-danger opacity-50 delete-icon" data-id="${t.id}" role="button"></i>
+                    <div class="text-end">
+                        <h2 class="m-0 ${isInc ? 'text-success' : 'text-danger'}">${isInc ? '+' : '-'}₹${t.amount}</h2>
+                        <button class="delete-btn" onclick="deleteItem(${index})"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
-                </div>
-            </div>
-        `;
-    $activityList.append(card);
-  });
-}
+                </div>`;
+            $list.append(card);
+        });
 
-
-let myChart;
-
-// Initialize Chart.js
-function updateChart() {
-  const ctx = document.getElementById('expenseChart').getContext('2d');
-
-  // Group totals by category
-  const categories = [...new Set(transactions.map(t => t.category))];
-  const data = categories.map(cat => {
-    return transactions
-      .filter(t => t.category === cat && !t.isIncome)
-      .reduce((sum, t) => sum + parseFloat(t.amount), 0);
-  });
-
-  if (myChart) myChart.destroy();
-
-  myChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: categories,
-      datasets: [{
-        data: data,
-        backgroundColor: ['#38bdf8', '#818cf8', '#c084fc', '#fb7185', '#34d399'],
-        borderWidth: 0,
-        hoverOffset: 10
-      }]
-    },
-    options: {
-      plugins: { legend: { display: false } },
-      cutout: '80%'
+        if (filtered.length === 0) $list.append('<h3 style="text-align:center; opacity:0.3; margin-top:2rem;">No entries found</h3>');
+        
+        $('#balance-display').text(`₹ ${balance.toFixed(2)}`);
+        localStorage.setItem('lorahk_data', JSON.stringify(transactions));
     }
-  });
-}
 
-// Search Logic
-$('#main-search').on('input', function () {
-  const query = $(this).val().toLowerCase();
-  renderTransactions(query);
+    $('#submit-transaction').on('click', function() {
+        const name = $('#entry-name').val();
+        const amount = $('#entry-amount').val();
+        const category = $('#entry-category').val();
+        const status = $('.toggle-btn.active').text();
+
+        if(!name || !amount) return alert("Fill all fields!");
+
+        transactions.unshift({ name, amount, category, status });
+        $('#entry-name').val('');
+        $('#entry-amount').val('');
+        render();
+    });
+
+    $('#filter-stream').on('change', render);
+
+    window.deleteItem = (i) => {
+        transactions.splice(i, 1);
+        render();
+    };
+
+    render(); // Initial load
 });
-
-// Update render function to accept search
-function renderTransactions(searchQuery = "") {
-  const filterValue = $('#filter-type').val();
-  const $activityList = $('#activity-list');
-  $activityList.empty();
-
-  const filtered = transactions.filter(t => {
-    const matchesFilter = (filterValue === 'all' || (filterValue === 'expense' ? !t.isIncome : t.isIncome));
-    const matchesSearch = t.name.toLowerCase().includes(searchQuery);
-    return matchesFilter && matchesSearch;
-  });
-
-  // ... loop through filtered and append activity cards (from previous design) ...
-
-  updateChart(); // Update visual insights whenever list changes
-}
