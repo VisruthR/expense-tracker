@@ -18,8 +18,8 @@
         <h1 class="heading-main">LORAHK'S <span>EXPENSE</span></h1>
       </div>
       <div class="stat-pill">
-        <span class="label">Available Balance</span>
-        <span class="value">₹ 0.00</span>
+        <span class="label">TOTAL Balance</span>
+        <span class="value" id="total-value">₹ 0.00</span>
       </div>
     </header>
 
@@ -30,13 +30,13 @@
 
         <div class="form-group">
           <label>What For?</label>
-          <input type="text" class="form-controls" placeholder="Subscription, Grocery...">
+          <input type="text" class="form-controls item-input" placeholder="Subscription, Grocery...">
         </div>
 
         <div class="form-row">
           <div class="form-group half-width">
             <label>Category</label>
-            <select class="form-controls">
+            <select class="form-controls" id="category-selector">
               <option>General</option>
               <option>Food</option>
               <option>Bills</option>
@@ -44,7 +44,7 @@
           </div>
           <div class="form-group half-width">
             <label>Amount</label>
-            <input type="number" class="form-controls" placeholder="0.00" min="0">
+            <input type="number" class="form-controls amount-input" placeholder="0.00" min="0">
           </div>
         </div>
 
@@ -55,7 +55,7 @@
           </div>
         </div>
 
-        <button class="submit-button">Confirm Transaction</button>
+        <button class="submit-button" onclick="getData()">Confirm Transaction</button>
 
 
         <div class="action-buttons">
@@ -77,9 +77,21 @@
 
         <div class="stream-content">
           <div class="stream-content" id="activity-list">
-            <div class="empty-state text-center p-5">
+            <div class="empty-state text-center p-5" style="display: block;">
               <h3 style="opacity: 0.5;">No transactions recorded yet.</h3>
             </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Catogory</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody class="output-table"></tbody>
+            </table>
           </div>
         </div>
       </section>
