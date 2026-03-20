@@ -236,7 +236,7 @@ body {
 }
 
 .icon-btn {
-  width: 50px;
+  width: 100%;
   height: 50px;
   background: #fff;
   border: var(--brutal-border);
@@ -247,6 +247,11 @@ body {
   justify-content: center;
   align-items: center;
   transition: 0.1s;
+  margin-right: 1%;
+}
+
+.icon-btn:last-child{
+  margin-right: 0px;
 }
 
 .icon-btn:active {
