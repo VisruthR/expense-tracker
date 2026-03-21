@@ -28,8 +28,8 @@ function getData() {
             <td class="amount-text">₹${amountValue.toLocaleString("en-IN")}</td>
             <td>${new Date().toLocaleDateString("en-GB")}</td>
             <td>
-                <button class="table-edit-btn">EDIT</button>
-                <button class="table-delete-btn">DLT</button>
+                <button class="table-edit-btn fa-solid fa-edit "></button>
+                <button class="table-delete-btn fa-solid fa-trash-can "></button>
             </td>
         </tr>
     `;
