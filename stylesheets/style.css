@@ -451,41 +451,27 @@ select.dropdown-small:hover {
 /* --- Brutalist Table Design --- */
 table {
   width: 100%;
-  border-collapse: collapse;
-  /* Ensures borders don't double up */
-  /* border: var(--brutal-border); */
+  border-collapse: collapse; /* Ensures borders merge perfectly */
   background: #fff;
   margin-top: 1rem;
-}
-
-table thead tr {
-  display: flex;
-  gap: 1rem;
 }
 
 /* Table Headers */
 table thead th {
   background: var(--accent-color);
-  /* Cyan header to make it pop */
   border: var(--brutal-border);
-  padding: 14px 15px;
+  padding: 14px 15px; 
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.5px;
   text-align: center;
   color: var(--text-main);
-  flex: 1;
-  padding: 10px;
-  background-color: #00e5ff;
-  /* border: 3px solid black; */
-  display: block;
-  box-shadow: var(--brutal-shadow-sm);
+  /* The shadow will sit inside the collapsed borders */
+  box-shadow: inset 0px -4px 0px rgba(0,0,0,0.1); 
 }
-
 
 /* Table Body Cells */
 table tbody td {
-  margin-top: 20px;
   border: var(--brutal-border);
   padding: 12px 15px;
   font-weight: 700;
@@ -493,15 +479,15 @@ table tbody td {
   text-align: center;
 }
 
-/* Alternating Row Colors for readability */
-table tbody tr:nth-child(even) {
-  background-color: #f8f8f8;
-}
-
-/* Brutalist Hover Effect - Turns row yellow on hover */
+/* 1. Set the base row color FIRST */
 table tbody tr {
   background-color: #ffe600;
   transition: background-color 0.1s ease-in-out;
+}
+
+/* 2. Set the alternating row color SECOND */
+table tbody tr:nth-child(even) {
+  background-color: #f8f8f8;
 }
 
 /* --- Dynamic Classes for JS Injection --- */
@@ -510,7 +496,6 @@ table tbody tr {
 .table-category-badge {
   display: inline-block;
   background: #ff3864;
-  /* Hot Pink */
   color: #fff;
   padding: 2px 8px;
   border: 2px solid #000;
@@ -543,7 +528,6 @@ table tbody tr {
   font-weight: 800;
   transition: 0.1s;
   margin-right: 8px;
-  /* Keeps the buttons from touching */
 }
 
 .table-edit-btn:active,
@@ -556,7 +540,6 @@ table tbody tr {
   background: var(--accent-color);
 }
 
-/* Update your existing delete button to have a hover effect! */
 .table-delete-btn {
   background: var(--danger);
   color: #fff;
