@@ -177,14 +177,15 @@ body {
 /* --- Toggle Buttons --- */
 .status-toggle-group {
   display: flex;
-  border: var(--brutal-border);
-  box-shadow: var(--brutal-shadow-sm);
 }
 
 .toggle-btn {
+  width: 100%;
+  box-shadow: var(--brutal-shadow);
+  margin-right: 6%;
   flex: 1;
   padding: 12px;
-  border: none;
+  border: var(--brutal-border);
   border-right: 3px solid #000;
   background: #fff;
   color: var(--text-main);
@@ -196,12 +197,22 @@ body {
 }
 
 .toggle-btn:last-child {
-  border-right: none;
+  margin-right: 0px;
 }
 
 .toggle-btn.active {
   background: var(--success);
   /* Green for income like your screenshot */
+  color: #000;
+}
+
+.toggle-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000;
+}
+
+.toggle-btn.non-active {
+  background: rgba(255, 0, 0, 0.527);
   color: #000;
 }
 
@@ -250,7 +261,7 @@ body {
   margin-right: 1%;
 }
 
-.icon-btn:last-child{
+.icon-btn:last-child {
   margin-right: 0px;
 }
 
@@ -389,18 +400,18 @@ select option {
 }
 
 /* Clean Reset for Dropdowns */
-select.form-controls, 
+select.form-controls,
 select.dropdown-small {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  
+
   background-color: #ffffff !important;
   color: #000000 !important;
   border: var(--brutal-border) !important;
   border-radius: 0px !important; /* Forces sharp corners seen in Image 5 */
   box-shadow: 4px 4px 0px #000000 !important;
-  
+
   padding: 10px 40px 10px 15px !important;
   font-family: inherit;
   font-weight: 800 !important;
@@ -474,7 +485,7 @@ table tbody tr:nth-child(even) {
 
 /* Brutalist Hover Effect - Turns row yellow on hover */
 table tbody tr {
-  background-color: #ffe600; 
+  background-color: #ffe600;
   transition: background-color 0.1s ease-in-out;
 }
 
@@ -506,7 +517,8 @@ table tbody tr {
 }
 
 /* Mini Brutalist Edit Button */
-.table-edit-btn , .table-delete-btn {
+.table-edit-btn,
+.table-delete-btn {
   color: #000;
   border: 2px solid #000;
   padding: 6px 12px;
@@ -517,7 +529,8 @@ table tbody tr {
   margin-right: 8px; /* Keeps the buttons from touching */
 }
 
-.table-edit-btn:active , .table-delete-btn:active {
+.table-edit-btn:active,
+.table-delete-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 0px 0px 0px #000;
 }
@@ -530,4 +543,11 @@ table tbody tr {
 .table-delete-btn {
   background: var(--danger);
   color: #fff;
+}
+
+.total-switched {
+  width: 100%;
+  height: 100%;
+  border: var(--brutal-border);
+  box-shadow: var(--brutal-shadow);
 }
