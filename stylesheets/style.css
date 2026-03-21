@@ -325,7 +325,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 8px;
 }
- 
+
 .delete-btn {
   background: none;
   border: none;
@@ -409,7 +409,8 @@ select.dropdown-small {
   background-color: #ffffff !important;
   color: #000000 !important;
   border: var(--brutal-border) !important;
-  border-radius: 0px !important; /* Forces sharp corners seen in Image 5 */
+  border-radius: 0px !important;
+  /* Forces sharp corners seen in Image 5 */
   box-shadow: 4px 4px 0px #000000 !important;
 
   padding: 10px 40px 10px 15px !important;
@@ -428,7 +429,8 @@ select.dropdown-small {
 /* Fix the 'Everything' dropdown specifically */
 .dropdown-small {
   background-color: #ffffff !important;
-  transform: rotate(-1deg); /* Subtle tilt to match the stat-pill aesthetic */
+  transform: rotate(-1deg);
+  /* Subtle tilt to match the stat-pill aesthetic */
 }
 
 /* Fix for the dropdown options list (The Bug in Image 5) */
@@ -449,16 +451,22 @@ select.dropdown-small:hover {
 /* --- Brutalist Table Design --- */
 table {
   width: 100%;
-  border-collapse: collapse; /* Ensures borders don't double up */
-  border: var(--brutal-border);
-  box-shadow: var(--brutal-shadow-sm);
+  border-collapse: collapse;
+  /* Ensures borders don't double up */
+  /* border: var(--brutal-border); */
   background: #fff;
   margin-top: 1rem;
 }
 
+table thead tr {
+  display: flex;
+  gap: 1rem;
+}
+
 /* Table Headers */
 table thead th {
-  background: var(--accent-color); /* Cyan header to make it pop */
+  background: var(--accent-color);
+  /* Cyan header to make it pop */
   border: var(--brutal-border);
   padding: 14px 15px;
   font-weight: 900;
@@ -466,7 +474,14 @@ table thead th {
   letter-spacing: -0.5px;
   text-align: center;
   color: var(--text-main);
+  flex: 1;
+  padding: 10px;
+  background-color: #00e5ff;
+  /* border: 3px solid black; */
+  display: block;
+  box-shadow: var(--brutal-shadow-sm);
 }
+
 
 /* Table Body Cells */
 table tbody td {
@@ -494,7 +509,8 @@ table tbody tr {
 /* Badge for the Category */
 .table-category-badge {
   display: inline-block;
-  background: #ff3864; /* Hot Pink */
+  background: #ff3864;
+  /* Hot Pink */
   color: #fff;
   padding: 2px 8px;
   border: 2px solid #000;
@@ -526,7 +542,8 @@ table tbody tr {
   box-shadow: 2px 2px 0px #000;
   font-weight: 800;
   transition: 0.1s;
-  margin-right: 8px; /* Keeps the buttons from touching */
+  margin-right: 8px;
+  /* Keeps the buttons from touching */
 }
 
 .table-edit-btn:active,
