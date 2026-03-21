@@ -1,178 +1,159 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expense Tracker</title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
 
-  <body>
-    <div class="dashboard-container">
-      <header class="main-header">
-        <div class="logo-area">
-          <i class="fa-solid fa-layer-group"></i>
-          <h1 class="heading-main">Expenses <span>Tracker</span></h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <header class="main-header">
+      <div class="logo-area">
+        <i class="fa-solid fa-layer-group"></i>
+        <h1 class="heading-main">Expenses <span>Tracker</span></h1>
+      </div>
+      <div class="stat-pill">
+        <span class="label">TOTAL</span>
+        <span class="value" id="total-value">₹ 0.00</span>
+      </div>
+    </header>
+
+    <main class="content-grid">
+
+      <!-- Expense card -->
+      <section class="input-card input-card-expense">
+        <h2 class="section-title">
+          <i class="fa-regular fa-square-plus"></i> Create Entry
+        </h2>
+
+        <div class="form-group">
+          <label>What For?</label>
+          <input type="text" class="form-controls item-input" placeholder="Subscription, Grocery..." />
         </div>
-        <div class="stat-pill">
-          <span class="label">TOTAL</span>
-          <span class="value" id="total-value">₹ 0.00</span>
-        </div>
-      </header>
 
-      <main class="content-grid">
-
-        <!-- Expense card -->
-        <section class="input-card input-card-expense">
-          <h2 class="section-title">
-            <i class="fa-regular fa-square-plus"></i> Create Entry
-          </h2>
-
-          <div class="form-group">
-            <label>What For?</label>
-            <input
-              type="text"
-              class="form-controls item-input"
-              placeholder="Subscription, Grocery..."
-            />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group half-width">
-              <label>Category</label>
-              <select class="form-controls" id="category-selector">
-                <option>General</option>
-                <option>Food</option>
-                <option>Bills</option>
-              </select>
-            </div>
-            <div class="form-group half-width">
-              <label>Amount</label>
-              <input
-                type="number"
-                class="form-controls amount-input"
-                placeholder="0.00"
-                min="0"
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="status-toggle-group">
-              <button class="toggle-btn active expense-btn">Expense</button>
-              <button class="toggle-btn non-active income-btn">Income</button>
-            </div>
-          </div>
-
-          <button class="submit-button" onclick="getData()">
-            Confirm Transaction
-          </button>
-
-          <div class="action-buttons">
-            <button class="icon-btn">
-              <i class="fa-solid fa-download"></i>
-            </button>
-            <button class="icon-btn"><i class="fa-solid fa-upload"></i></button>
-            <button class="icon-btn">
-              <i class="fa-solid fa-calculator"></i>
-            </button>
-          </div>
-        </section>
-
-        <!-- Income section -->
-        <section class="input-card input-card-income" style="display: none">
-          <h2 class="section-title">
-            <i class="fa-regular fa-square-plus"></i> Income Index
-          </h2>
-
-          <div class="form-group">
-            <label>Income</label>
-            <input
-              type="number"
-              class="form-controls amount-input"
-              placeholder="0.00"
-              min="0"
-            />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group half-width">
-              <label>Total Expense</label><br>
-              <span class="total-switched">0.00</span>
-            </div>
-            <div class="form-group half-width">
-              <label>Amount</label>
-              <input
-                type="number"
-                class="form-controls amount-input"
-                placeholder="0.00"
-                min="0"
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="status-toggle-group">
-              <button class="toggle-btn non-active expense-btn">Expense</button>
-              <button class="toggle-btn active income-btn">Income</button>
-            </div>
-          </div>
-
-          <button class="submit-button" onclick="getData()">
-            Confirm Transaction
-          </button>
-
-          <div class="action-buttons">
-            <button class="icon-btn">
-              <i class="fa-solid fa-download"></i>
-            </button>
-            <button class="icon-btn"><i class="fa-solid fa-upload"></i></button>
-            <button class="icon-btn">
-              <i class="fa-solid fa-calculator"></i>
-            </button>
-          </div>
-        </section>
-
-        <section class="display-card">
-          <div class="stream-header">
-            <h2 class="section-title">
-              <i class="fa-solid fa-bolt"></i> Live Stream
-            </h2>
-            <select class="form-controls dropdown-small">
-              <option>Everything</option>
-              <option>Income</option>
-              <option>Expense</option>
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label>Category</label>
+            <select class="form-controls" id="category-selector">
+              <option>General</option>
+              <option>Food</option>
+              <option>Bills</option>
             </select>
           </div>
+          <div class="form-group half-width">
+            <label>Amount</label>
+            <input type="number" class="form-controls amount-input" placeholder="0.00" min="0" />
+          </div>
+        </div>
 
-          <div class="stream-content">
-            <div class="stream-content" id="activity-list">
-              <div class="empty-state text-center p-5" style="display: block">
-                <h3 style="opacity: 0.5">No transactions recorded yet.</h3>
-              </div>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Catogory</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody class="output-table"></tbody>
-              </table>
+        <div class="form-group">
+          <div class="status-toggle-group">
+            <button class="toggle-btn active expense-btn">Expense</button>
+            <button class="toggle-btn non-active income-btn">Income</button>
+          </div>
+        </div>
+
+        <button class="submit-button" onclick="getData()">
+          Confirm Transaction
+        </button>
+
+        <div class="action-buttons">
+          <button class="icon-btn">
+            <i class="fa-solid fa-download"></i>
+          </button>
+          <button class="icon-btn"><i class="fa-solid fa-upload"></i></button>
+          <button class="icon-btn">
+            <i class="fa-solid fa-calculator"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Income section -->
+      <section class="input-card input-card-income" style="display: none">
+        <h2 class="section-title">
+          <i class="fa-regular fa-square-plus"></i> Income Index
+        </h2>
+
+        <div class="form-group">
+          <label>Income</label>
+          <input type="number" class="form-controls amount-input" placeholder="0.00" min="0" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half-width">
+            <label>Total Expense</label><br>
+            <span class="total-switched">0.00</span>
+          </div>
+          <div class="form-group half-width">
+            <label>Amount</label>
+            <input type="number" class="form-controls amount-input" placeholder="0.00" min="0" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="status-toggle-group">
+            <button class="toggle-btn non-active expense-btn">Expense</button>
+            <button class="toggle-btn active income-btn">Income</button>
+          </div>
+        </div>
+
+        <button class="submit-button" onclick="getData()">
+          Confirm Transaction
+        </button>
+
+        <div class="action-buttons">
+          <button class="icon-btn">
+            <i class="fa-solid fa-download"></i>
+          </button>
+          <button class="icon-btn"><i class="fa-solid fa-upload"></i></button>
+          <button class="icon-btn">
+            <i class="fa-solid fa-calculator"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="display-card">
+        <div class="stream-header">
+          <h2 class="section-title">
+            <i class="fa-solid fa-bolt"></i> Live Stream
+          </h2>
+          <select class="form-controls dropdown-small">
+            <option>Everything</option>
+            <option>Income</option>
+            <option>Expense</option>
+          </select>
+        </div>
+
+        <div class="stream-content">
+          <div class="stream-content" id="activity-list">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Catogory</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody class="output-table"></tbody>
+            </table>
+
+            <div class="empty-state text-center p-5" style="display: block">
+              <h3 style="opacity: 0.5">No transactions recorded yet.</h3>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
+  </div>
 
-    <script src="javascripts/expense.js"></script>
-    <script src="javascripts/switcher.js"></script>
-  </body>
+  <script src="javascripts/expense.js"></script>
+  <script src="javascripts/switcher.js"></script>
+</body>
+
 </html>
