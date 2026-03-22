@@ -38,3 +38,4 @@ incomeBtns.forEach((btn) => {
 submitBtn.addEventListener("click", () => {
   balence.textContent = parseFloat(income.value) - total;
 });
+ 
