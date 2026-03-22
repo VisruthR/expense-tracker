@@ -14,6 +14,8 @@ function switchView(currentView) {
 expenseBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     switchView(expenseView);
+    totalAbove.textContent = "TOTAL";
+    totalDisplay.textContent = "₹ " + total.toFixed(2);
   });
 });
 
@@ -24,18 +26,25 @@ const totalExpense = document.querySelector(".total-switched");
 const submitBtn = document.querySelector(".switched-submit-button");
 const balence = document.querySelector(".total-balence");
 const income = document.querySelector(".income-input");
+const totalAbove = document.querySelector("#total-id");
 
 incomeBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     switchView(incomeView);
-    totalExpense.textContent = totalDisplay.textContent;
+    totalExpense.textContent = "₹ " + total.toFixed(2);
     if (income.value) {
       balence.textContent = parseFloat(income.value) - total;
+      totalDisplay.textContent =
+        "₹" + (parseFloat(income.value) - total).toFixed(2);
+    }else{
+      totalDisplay.textContent = "₹ " + "0.00"
     }
+    totalAbove.textContent = "BALENCE";
   });
 });
 
 submitBtn.addEventListener("click", () => {
   balence.textContent = parseFloat(income.value) - total;
+  totalDisplay.textContent =
+    "₹" + (parseFloat(income.value) - total).toFixed(2);
 });
- 
