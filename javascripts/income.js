@@ -16,8 +16,25 @@ expenseBtns.forEach((btn) => {
     switchView(expenseView);
   });
 });
+
+import { totalDisplay } from "./expense.js";
+import { total } from "./expense.js";
+
+const totalExpense = document.querySelector(".total-switched");
+const submitBtn = document.querySelector(".switched-submit-button");
+const balence = document.querySelector(".total-balence");
+const income = document.querySelector(".income-input");
+
 incomeBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     switchView(incomeView);
+    totalExpense.textContent = totalDisplay.textContent;
+    if (income.value) {
+      balence.textContent = parseFloat(income.value) - total;
+    }
   });
+});
+
+submitBtn.addEventListener("click", () => {
+  balence.textContent = parseFloat(income.value) - total;
 });

@@ -1,5 +1,5 @@
-let total = 0
-const totalDisplay = document.querySelector("#total-value")
+export let total = 0;
+export const totalDisplay = document.querySelector("#total-value");
 
 function getData() {
   const itemInput = document.querySelector(".item-input");
@@ -39,6 +39,6 @@ function getData() {
   itemInput.value = "";
   amountInput.value = "";
 
-	document.querySelector(".empty-state").style.display = "none"
-
+  document.querySelector(".empty-state").style.display = "none";
 }
+window.getData = getData;
