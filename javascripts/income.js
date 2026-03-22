@@ -44,6 +44,7 @@ incomeBtns.forEach((btn) => {
 });
 
 submitBtn.addEventListener("click", () => {
+  if (!income.value) alert("Enter your income first")
   balence.textContent = parseFloat(income.value) - total;
   totalDisplay.textContent =
     "₹" + (parseFloat(income.value) - total).toFixed(2);
