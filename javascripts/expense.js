@@ -41,4 +41,22 @@ function getData() {
 
   document.querySelector(".empty-state").style.display = "none";
 }
+
+const table = document.querySelector(".output-table");
+table.addEventListener("click", function (event) {
+  if (event.target.classList.contains("table-delete-btn")) {
+    const targetRow = event.target.closest("tr");
+    const amountRemove = parseFloat(
+      targetRow
+        .querySelector(".amount-text")
+        .textContent.replace("₹", "")
+        .replace(/,/g, ""),
+    );
+
+    targetRow.remove();
+    total = total - amountRemove;
+    totalDisplay.textContent = "₹" + total.toFixed(2);
+  }
+});
+
 window.getData = getData;
