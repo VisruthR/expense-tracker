@@ -326,48 +326,12 @@ body {
   margin-bottom: 8px;
 }
 
-.delete-btn {
-  background: none;
-  border: none;
-  color: #ff1744;
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-top: 10px;
-}
-
 .text-success {
   color: var(--success) !important;
 }
 
 .text-danger {
   color: var(--danger) !important;
-}
-
-/* Target all selects or specific classes */
-.form-controls,
-.dropdown-small,
-select {
-  appearance: none;
-  /* Removes default browser arrow */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background-color: #ffffff !important;
-  border: 3px solid #000000 !important;
-  border-radius: 0px !important;
-  /* Sharp corners */
-  box-shadow: 4px 4px 0px #000000 !important;
-  /* Hard shadow */
-
-  padding: 10px 40px 10px 15px !important;
-  font-weight: 800 !important;
-  cursor: pointer;
-
-  /* Add a custom brutalist arrow */
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='square' stroke-linejoin='arcs'%3e%3cpath d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e") !important;
-  background-repeat: no-repeat !important;
-  background-position: right 10px center !important;
-  background-size: 18px !important;
 }
 
 .form-controls:focus {
@@ -448,48 +412,6 @@ select.dropdown-small:hover {
   box-shadow: 6px 6px 0px #000000 !important;
 }
 
-/* --- Brutalist Table Design --- */
-table {
-  width: 100%;
-  border-collapse: collapse; /* Ensures borders merge perfectly */
-  background: #fff;
-  margin-top: 1rem;
-}
-
-/* Table Headers */
-table thead th {
-  background: var(--accent-color);
-  border: var(--brutal-border);
-  padding: 14px 15px; 
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.5px;
-  text-align: center;
-  color: var(--text-main);
-  /* The shadow will sit inside the collapsed borders */
-  box-shadow: inset 0px -4px 0px rgba(0,0,0,0.1); 
-}
-
-/* Table Body Cells */
-table tbody td {
-  border: var(--brutal-border);
-  padding: 12px 15px;
-  font-weight: 700;
-  vertical-align: middle;
-  text-align: center;
-}
-
-/* 1. Set the base row color FIRST */
-table tbody tr {
-  background-color: #ffe600;
-  transition: background-color 0.1s ease-in-out;
-}
-
-/* 2. Set the alternating row color SECOND */
-table tbody tr:nth-child(even) {
-  background-color: #f8f8f8;
-}
-
 /* --- Dynamic Classes for JS Injection --- */
 
 /* Badge for the Category */
@@ -545,12 +467,19 @@ table tbody tr:nth-child(even) {
   color: #fff;
 }
 
-.total-switched {
+.total-switched, .total-balence{
+  display: inline-block;
   width: 100%;
-  height: 100%;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  background: #fff;
   border: var(--brutal-border);
-  box-shadow: var(--brutal-shadow);
-}/* --- Brutalist Table Design --- */
+  box-shadow: 2px 2px 0px #000;
+  box-sizing: border-box;
+} /* --- Brutalist Table Design --- */
 table {
   width: 100%;
   border-collapse: collapse; /* Ensures borders don't double up */
@@ -584,7 +513,7 @@ table tbody td {
 
 /* Alternating Row Colors for readability */
 table tbody tr:nth-child(even) {
-  background-color: #f8f8f8;
+  background-color: #eff169;
 }
 
 /* Brutalist Hover Effect - Turns row yellow on hover */
@@ -605,19 +534,6 @@ table tbody tr {
   font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-}
-
-/* Colors for the amount */
-.amount-income {
-  color: var(--success);
-  font-weight: 900;
-  font-size: 1.1rem;
-}
-
-.amount-expense {
-  color: var(--danger);
-  font-weight: 900;
-  font-size: 1.1rem;
 }
 
 /* Mini Brutalist Edit Button */
@@ -647,11 +563,4 @@ table tbody tr {
 .table-delete-btn {
   background: var(--danger);
   color: #fff;
-}
-
-.total-switched {
-  width: 100%;
-  height: 100%;
-  border: var(--brutal-border);
-  box-shadow: var(--brutal-shadow);
 }
