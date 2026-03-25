@@ -1,77 +1,97 @@
-/* Section Titles & Labels */
+/* Section Titles */
 .section-title {
   font-size: 1.4rem;
   font-weight: 900;
-  text-transform: uppercase;
   margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+/* Forms & Layout */
 .form-group {
   margin-bottom: 1.5rem;
 }
 .form-row {
   display: flex;
   gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 .half-width {
   flex: 1;
 }
 
 .form-group label {
-  background: #ff3864;
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #ff3864; /* Hot Pink */
   color: white;
   padding: 2px 8px;
   border: 2px solid #000;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 0.8rem;
 }
 
-/* Brutalist Inputs & Selects */
 .form-controls {
   background: #fff;
   border: var(--brutal-border);
   padding: 12px 14px;
   width: 100%;
+  font-family: inherit;
   font-weight: 700;
+  font-size: 1rem;
   box-shadow: 2px 2px 0px #000;
+  transition: 0.1s ease-in-out;
 }
 
-/* Specific Select Styling (The Custom Arrow) */
-select.form-controls {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3e%3cpath d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 15px center;
-  background-size: 16px;
-}
-
-/* Buttons & Toggles */
-.submit-button {
-  width: 100%;
-  padding: 16px;
-  background: var(--accent-color);
-  border: var(--brutal-border);
-  box-shadow: var(--brutal-shadow);
-  font-weight: 900;
-  text-transform: uppercase;
-  cursor: pointer;
+/* Toggle Buttons (Restored Shadow and Spacing) */
+.status-toggle-group {
+  display: flex;
 }
 
 .toggle-btn {
+  width: 100%;
+  box-shadow: var(--brutal-shadow); /* Crucial for that "After" look */
+  margin-right: 6%;
   flex: 1;
   padding: 12px;
   border: var(--brutal-border);
   background: #fff;
+  color: var(--text-main);
   font-weight: 800;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: 0.1s;
+}
+
+.toggle-btn:last-child {
+  margin-right: 0px;
 }
 
 .toggle-btn.active {
   background: var(--success);
 }
 .toggle-btn.non-active {
-  background: rgba(255, 0, 0, 0.2);
+  background: rgba(255, 0, 0, 0.527);
+} /* Restored original opacity */
+
+/* Confirm Transaction Button (Restored size and shadow) */
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent-color);
+  color: #000;
+  border: var(--brutal-border);
+  box-shadow: var(--brutal-shadow);
+  font-family: inherit;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: 0.1s;
 }
 
 .action-buttons {
@@ -80,20 +100,55 @@ select.form-controls {
   margin-top: 2rem;
 }
 .icon-btn {
-  flex: 1;
+  width: 100%;
   height: 50px;
+  background: #fff;
   border: var(--brutal-border);
   box-shadow: var(--brutal-shadow-sm);
   cursor: pointer;
 }
 
-/* Income View Shared Styles */
-.total-switched,
-.total-balence {
+/* Container for the Income View */
+.input-card-income {
+  display: none; /* Managed by ui-toggle.js */
+}
+
+/* Specific styling for the Income Index Labels */
+.income-label {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #ff3864; /* The Hot Pink from your screenshot */
+  color: white;
+  padding: 4px 10px;
+  border: 2px solid #000;
+  margin-bottom: 8px;
+}
+
+/* Layout for Total Expense and Your Balance in the Income tab */
+.income-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-item {
+  flex: 1;
+}
+
+.summary-value {
   display: block;
-  padding: 12px;
-  background: #fff;
-  border: var(--brutal-border);
-  box-shadow: 2px 2px 0px #000;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-top: 5px;
+}
+
+/* The Big Income Submit Button (Bottom Right) */
+.switched-submit-button {
+  background: var(--success) !important; /* Bright Green */
+  color: #000;
+  font-weight: 900;
+  box-shadow: var(--brutal-shadow);
 }

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Expense Tracker</title>
 
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="stylesheet" href="/stylesheets/forms.css" />
-    <link rel="stylesheet" href="/stylesheets/table.css" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="stylesheets/forms.css" />
+    <link rel="stylesheet" href="stylesheets/table.css" />
 
     <link
       rel="stylesheet"
@@ -16,8 +16,6 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
     />
   </head>
 
@@ -35,14 +33,13 @@
       </header>
 
       <main class="content-grid">
-        <!-- Expense card -->
         <section class="input-card input-card-expense">
           <h2 class="section-title">
             <i class="fa-regular fa-square-plus"></i> Create Entry
           </h2>
 
           <div class="form-group">
-            <label>What For?</label>
+            <span class="income-label">WHAT FOR?</span>
             <input
               type="text"
               class="form-controls item-input"
@@ -52,7 +49,7 @@
 
           <div class="form-row">
             <div class="form-group half-width">
-              <label>Category</label>
+              <span class="income-label">CATEGORY</span>
               <select class="form-controls" id="category-selector">
                 <option>General</option>
                 <option>Food</option>
@@ -60,7 +57,7 @@
               </select>
             </div>
             <div class="form-group half-width">
-              <label>Amount</label>
+              <span class="income-label">AMOUNT</span>
               <input
                 type="number"
                 class="form-controls amount-input"
@@ -92,30 +89,29 @@
           </div>
         </section>
 
-        <!-- Income section -->
         <section class="input-card input-card-income" style="display: none">
           <h2 class="section-title">
             <i class="fa-regular fa-square-plus"></i> Income Index
           </h2>
 
           <div class="form-group">
-            <label>Income</label>
+            <span class="income-label">INCOME</span>
             <input
               type="number"
-              class="form-controls amount-input income-input"
+              class="form-controls income-input"
               placeholder="0.00"
               min="0"
             />
           </div>
 
-          <div class="form-row">
-            <div class="form-group half-width">
-              <label>Total Expense</label><br />
-              <span class="total-switched">0.00</span>
+          <div class="income-summary-row">
+            <div class="summary-item">
+              <span class="income-label">TOTAL EXPENSE</span>
+              <div class="summary-value total-switched">₹ 0.00</div>
             </div>
-            <div class="form-group half-width">
-              <label>Your Balence</label>
-              <span class="total-balence">0.00</span>
+            <div class="summary-item">
+              <span class="income-label">YOUR BALENCE</span>
+              <div class="summary-value total-balence">₹ 0.00</div>
             </div>
           </div>
 
@@ -153,24 +149,22 @@
             </select>
           </div>
 
-          <div class="stream-content">
-            <div class="stream-content" id="activity-list">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Catogory</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody class="output-table"></tbody>
-              </table>
+          <div class="stream-content" id="activity-list">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Catogory</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody class="output-table"></tbody>
+            </table>
 
-              <div class="empty-state text-center p-5" style="display: block">
-                <h3 style="opacity: 0.5">No transactions recorded yet.</h3>
-              </div>
+            <div class="empty-state text-center p-5">
+              <h3 style="opacity: 0.5">No transactions recorded yet.</h3>
             </div>
           </div>
         </section>
@@ -179,10 +173,6 @@
 
     <script type="module" src="javascripts/script.js"></script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

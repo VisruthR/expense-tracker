@@ -1,6 +1,6 @@
 .display-card {
   overflow: auto;
-  max-height: 55vh;
+  max-height: 51vh;
 }
 
 .stream-header {
@@ -9,58 +9,46 @@
   align-items: center;
   border-bottom: 3px solid #000;
   padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-/* Table Design */
+/* Restored the small width for the dropdown */
+.dropdown-small {
+  width: auto !important;
+  padding: 8px 35px 8px 12px !important;
+  font-size: 0.9rem;
+  box-shadow: 2px 2px 0px #000 !important;
+  transform: rotate(-1deg);
+}
+
+/* Table Headers - Restored Cyan color and padding */
 table {
   width: 100%;
   border-collapse: collapse;
   border: var(--brutal-border);
+  box-shadow: var(--brutal-shadow-sm);
   background: #fff;
+  margin-top: 1rem;
 }
 
 table thead th {
   background: var(--accent-color);
   border: var(--brutal-border);
-  padding: 14px;
+  padding: 14px 15px;
   font-weight: 900;
   text-transform: uppercase;
 }
 
 table tbody td {
   border: var(--brutal-border);
-  padding: 12px;
-  text-align: center;
+  padding: 12px 15px;
   font-weight: 700;
+  text-align: center;
 }
 
-table tbody tr:hover {
-  background-color: #ffe600;
-}
-
-/* Status Badges & Action Buttons */
-.category-badge {
-  background: #ff3864;
-  color: #fff;
-  padding: 2px 8px;
-  border: 2px solid #000;
-  font-size: 0.75rem;
+/* Empty State Styling */
+.empty-state h3 {
+  opacity: 0.5;
+  font-weight: 800;
   text-transform: uppercase;
-}
-
-.table-edit-btn,
-.table-delete-btn {
-  border: 2px solid #000;
-  padding: 6px 12px;
-  cursor: pointer;
-  box-shadow: 2px 2px 0px #000;
-}
-
-.table-edit-btn {
-  background: var(--accent-color);
-}
-.table-delete-btn {
-  background: var(--danger);
-  color: white;
 }
