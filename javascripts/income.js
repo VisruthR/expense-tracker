@@ -1,3 +1,9 @@
+const totalExpense = document.querySelector(".total-switched");
+const submitBtn = document.querySelector(".switched-submit-button");
+const balence = document.querySelector(".total-balence");
+const income = document.querySelector(".income-input");
+const totalAbove = document.querySelector("#total-id");
+
 const expenseView = document.querySelector(".input-card-expense");
 const incomeView = document.querySelector(".input-card-income");
 
@@ -21,12 +27,6 @@ expenseBtns.forEach((btn) => {
 
 import { totalDisplay } from "./expense.js";
 import { total } from "./expense.js";
-
-const totalExpense = document.querySelector(".total-switched");
-const submitBtn = document.querySelector(".switched-submit-button");
-const balence = document.querySelector(".total-balence");
-const income = document.querySelector(".income-input");
-const totalAbove = document.querySelector("#total-id");
 
 incomeBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
