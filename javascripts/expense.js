@@ -1,98 +1,71 @@
-export let total = 0;
-export const totalDisplay = document.querySelector("#total-value");
+import { state, updateGlobalDisplay } from "./state.js";
 
-function getData() {
+const tableBody = document.querySelector(".output-table");
+const emptyState = document.querySelector(".empty-state");
+
+export function addExpense() {
   const itemInput = document.querySelector(".item-input");
   const categorySelector = document.querySelector("#category-selector");
   const amountInput = document.querySelector(".amount-input");
 
-  const itemValue = itemInput.value.trim();
-  const amountValue = parseFloat(amountInput.value);
+  const name = itemInput.value.trim();
+  const amount = parseFloat(amountInput.value);
 
-  if (!itemValue || isNaN(amountValue) || amountValue <= 0) {
-    alert("Please provide a valid item name and amount.");
+  if (!name || isNaN(amount) || amount <= 0) {
+    alert("Please enter valid details.");
     return;
   }
 
-  // Update Total if Paid
+  // Update State
+  state.totalExpense += amount;
+  updateGlobalDisplay();
 
-  total += amountValue;
-  totalDisplay.textContent = "₹" + total.toFixed(2);
+  // Add to Table
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td class="name-input">${name}</td>
+    <td><span class="category-badge">${categorySelector.value}</span></td>
+    <td class="amount-text">₹${amount.toLocaleString("en-IN")}</td>
+    <td>${new Date().toLocaleDateString("en-GB")}</td>
+    <td>
+        <button class="table-edit-btn fa-solid fa-edit"></button>
+        <button class="table-delete-btn fa-solid fa-trash-can"></button>
+    </td>
+  `;
+  tableBody.appendChild(row);
 
-  // Add Row to Table
-  const tableBody = document.querySelector(".output-table");
-  const newRow = `
-        <tr>
-            <td class="name-input">${itemValue}</td>
-            <td><span class="category-badge">${categorySelector.value}</span></td>
-            <td class="amount-text">₹${amountValue.toLocaleString("en-IN")}</td>
-            <td>${new Date().toLocaleDateString("en-GB")}</td>
-            <td>
-                <button class="table-edit-btn fa-solid fa-edit "></button>
-                <button class="table-delete-btn fa-solid fa-trash-can "></button>
-            </td>
-        </tr>
-    `;
-  tableBody.innerHTML += newRow;
-
-  // Reset
+  // Reset UI
   itemInput.value = "";
   amountInput.value = "";
-
-  document.querySelector(".empty-state").style.display = "none";
+  emptyState.style.display = "none";
 }
 
-// delete
+// Handle Delete and Edit via Event Delegation
+tableBody.addEventListener("click", (e) => {
+  const row = e.target.closest("tr");
+  if (!row) return;
 
-function dlt(event) {
-  const targetRow = event.target.closest("tr");
-  const amountRemove = parseFloat(
-    targetRow
-      .querySelector(".amount-text")
-      .textContent.replace("₹", "")
-      .replace(/,/g, ""),
-  );
-
-  targetRow.remove();
-  total = total - amountRemove;
-  totalDisplay.textContent = "₹" + total.toFixed(2);
-}
-
-const table = document.querySelector(".output-table");
-table.addEventListener("click", function (event) {
-  if (event.target.classList.contains("table-delete-btn")) {
-    dlt(event);
-  }
-});
-
-//edit
-
-function edit(event) {
-  const targetRow = event.target.closest("tr");
-  const name = targetRow.querySelector(".name-input").textContent;
-  const category = targetRow.querySelector(".category-badge").textContent;
   const amount = parseFloat(
-    targetRow
-      .querySelector(".amount-text")
-      .textContent.replace("₹", "")
-      .replace(/,/g, ""),
+    row.querySelector(".amount-text").textContent.replace(/[₹,]/g, ""),
   );
 
-  const inputName = document.querySelector(".item-input");
-  const inputCategory = document.querySelector("#category-selector");
-  const inputAmount = document.querySelector(".amount-input");
+  if (e.target.classList.contains("table-delete-btn")) {
+    state.totalExpense -= amount;
+    row.remove();
+    updateGlobalDisplay();
+    if (tableBody.children.length === 0) emptyState.style.display = "block";
+  }
 
-  inputName.value = name;
-  inputCategory.value = category;
-  inputAmount.value = amount;
-}
-
-table.addEventListener("click", function (event) {
-  if (event.target.classList.contains("table-edit-btn")) {
-    edit(event);
-    dlt(event);
+  if (e.target.classList.contains("table-edit-btn")) {
+    document.querySelector(".item-input").value =
+      row.querySelector(".name-input").textContent;
+    document.querySelector(".amount-input").value = amount;
+    // Remove the row so it can be "re-added" after editing
+    state.totalExpense -= amount;
+    row.remove();
+    updateGlobalDisplay();
   }
 });
 
-//global
-window.getData = getData;
+// Expose to window because of your HTML onclick="getData()"
+window.getData = addExpense;

@@ -6,9 +6,16 @@
   margin-bottom: 1.5rem;
 }
 
-.form-group { margin-bottom: 1.5rem; }
-.form-row { display: flex; gap: 1.5rem; }
-.half-width { flex: 1; }
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+.half-width {
+  flex: 1;
+}
 
 .form-group label {
   background: #ff3864;
@@ -60,14 +67,29 @@ select.form-controls {
   cursor: pointer;
 }
 
-.toggle-btn.active { background: var(--success); }
-.toggle-btn.non-active { background: rgba(255, 0, 0, 0.2); }
+.toggle-btn.active {
+  background: var(--success);
+}
+.toggle-btn.non-active {
+  background: rgba(255, 0, 0, 0.2);
+}
 
-.action-buttons { display: flex; gap: 15px; margin-top: 2rem; }
-.icon-btn { flex: 1; height: 50px; border: var(--brutal-border); box-shadow: var(--brutal-shadow-sm); cursor: pointer; }
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 2rem;
+}
+.icon-btn {
+  flex: 1;
+  height: 50px;
+  border: var(--brutal-border);
+  box-shadow: var(--brutal-shadow-sm);
+  cursor: pointer;
+}
 
 /* Income View Shared Styles */
-.total-switched, .total-balence {
+.total-switched,
+.total-balence {
   display: block;
   padding: 12px;
   background: #fff;
