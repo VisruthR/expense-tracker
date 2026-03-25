@@ -14,7 +14,7 @@ function showView(viewName) {
   } else {
     expenseView.style.display = "none";
     incomeView.style.display = "block";
-    totalLabel.textContent = "BALANCE";
+    totalLabel.textContent = "TOTAL";
     refreshIncomeUI();
   }
   updateGlobalDisplay();

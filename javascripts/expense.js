@@ -5,10 +5,12 @@ const emptyState = document.querySelector(".empty-state");
 
 export function addExpense() {
   const itemInput = document.querySelector(".item-input");
+  const accountSelector = document.querySelector("#account-selector");
   const categorySelector = document.querySelector("#category-selector");
   const amountInput = document.querySelector(".amount-input");
 
   const name = itemInput.value.trim();
+  const account = accountSelector.value;
   const amount = parseFloat(amountInput.value);
 
   if (!name || isNaN(amount) || amount <= 0) {
@@ -24,12 +26,17 @@ export function addExpense() {
   const row = document.createElement("tr");
   row.innerHTML = `
     <td class="name-input">${name}</td>
+    <td><span class="account-badge">${account}</span></td>
     <td><span class="category-badge">${categorySelector.value}</span></td>
     <td class="amount-text">₹${amount.toLocaleString("en-IN")}</td>
     <td>${new Date().toLocaleDateString("en-GB")}</td>
     <td>
-        <button class="table-edit-btn fa-solid fa-edit"></button>
-        <button class="table-delete-btn fa-solid fa-trash-can"></button>
+      <button class="table-action-btn table-edit-btn" title="Edit">
+        <i class="fa-solid fa-pen"></i>
+      </button>
+      <button class="table-action-btn table-delete-btn" title="Delete">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
     </td>
   `;
   tableBody.appendChild(row);

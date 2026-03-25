@@ -46,6 +46,40 @@ table tbody td {
   text-align: center;
 }
 
+.table-action-btn {
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  padding: 7px 9px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0 3px;
+  font-size: 0.9rem;
+  box-shadow: 2px 2px 0 #000;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.table-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0 #000;
+}
+
+.table-action-btn i {
+  pointer-events: none;
+}
+
+.table-edit-btn {
+  background: #00e676;
+  border-color: #00c851;
+  color: #000;
+}
+
+.table-delete-btn {
+  background: #ff1744;
+  border-color: #c4001d;
+  color: #fff;
+}
+
 /* Empty State Styling */
 .empty-state h3 {
   opacity: 0.5;

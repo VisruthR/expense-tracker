@@ -22,13 +22,26 @@
   <body>
     <div class="dashboard-container">
       <header class="main-header">
-        <div class="logo-area">
-          <i class="fa-solid fa-layer-group"></i>
-          <h1 class="heading-main">Expenses <span>Tracker</span></h1>
+        <div class="header-left">
+          <div class="logo-area">
+            <i class="fa-solid fa-layer-group"></i>
+            <h1 class="heading-main">Expenses <span>Tracker</span></h1>
+          </div>
         </div>
-        <div class="stat-pill">
-          <span class="label" id="total-id">TOTAL</span>
-          <span class="value" id="total-value">₹ 0.00</span>
+
+        <div class="header-right">
+          <div class="stat-pill">
+            <span class="label">EXPENSE</span>
+            <span class="value" id="header-total-expense">₹ 0.00</span>
+          </div>
+          <div class="stat-pill">
+            <span class="label">INCOME</span>
+            <span class="value" id="header-balance">₹ 0.00</span>
+          </div>
+          <div class="stat-pill">
+            <span class="label" id="total-id">TOTAL</span>
+            <span class="value" id="total-value">₹ 0.00</span>
+          </div>
         </div>
       </header>
 
@@ -38,13 +51,23 @@
             <i class="fa-regular fa-square-plus"></i> Create Entry
           </h2>
 
-          <div class="form-group">
-            <span class="income-label">WHAT FOR?</span>
-            <input
-              type="text"
-              class="form-controls item-input"
-              placeholder="Subscription, Grocery..."
-            />
+          <div class="form-row">
+            <div class="form-group half-width">
+              <span class="income-label">WHAT FOR?</span>
+              <input
+                type="text"
+                class="form-controls item-input"
+                placeholder="Subscription, Grocery..."
+              />
+            </div>
+            <div class="form-group half-width">
+              <span class="income-label">ACCOUNT</span>
+              <select class="form-controls" id="account-selector">
+                <option value="CASH">CASH</option>
+                <option value="UPI">UPI</option>
+                <option value="CARD">CARD</option>
+              </select>
+            </div>
           </div>
 
           <div class="form-row">
@@ -94,25 +117,38 @@
             <i class="fa-regular fa-square-plus"></i> Income Index
           </h2>
 
-          <div class="form-group">
-            <span class="income-label">INCOME</span>
-            <input
-              type="number"
-              class="form-controls income-input"
-              placeholder="0.00"
-              min="0"
-            />
+          <div class="form-row">
+            <div class="form-group half-width">
+              <span class="income-label">AMOUNT</span>
+              <input
+                type="number"
+                class="form-controls income-input"
+                placeholder="0.00"
+                min="0"
+              />
+            </div>
           </div>
 
-          <div class="income-summary-row">
-            <div class="summary-item">
-              <span class="income-label">TOTAL EXPENSE</span>
-              <div class="summary-value total-switched">₹ 0.00</div>
+          <div class="form-row">
+
+            <div class="form-group half-width">
+              <span class="income-label">ACCOUNT</span>
+              <select class="form-controls" id="income-account-selector">
+                <option value="CASH">CASH</option>
+                <option value="UPI">UPI</option>
+                <option value="CARD">CARD</option>
+              </select>
             </div>
-            <div class="summary-item">
-              <span class="income-label">YOUR BALENCE</span>
-              <div class="summary-value total-balence">₹ 0.00</div>
+            
+            <div class="form-group half-width">
+              <span class="income-label">CATEGORY</span>
+              <select class="form-controls" id="income-category-selector">
+                <option>General</option>
+                <option>Food</option>
+                <option>Bills</option>
+              </select>
             </div>
+            
           </div>
 
           <div class="form-group">
@@ -154,6 +190,7 @@
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Account</th>
                   <th>Catogory</th>
                   <th>Amount</th>
                   <th>Date</th>
