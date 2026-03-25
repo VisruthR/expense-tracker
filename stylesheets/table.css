@@ -1,0 +1,60 @@
+.display-card {
+  overflow: auto;
+  max-height: 55vh;
+}
+
+.stream-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #000;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Table Design */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: var(--brutal-border);
+  background: #fff;
+}
+
+table thead th {
+  background: var(--accent-color);
+  border: var(--brutal-border);
+  padding: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+table tbody td {
+  border: var(--brutal-border);
+  padding: 12px;
+  text-align: center;
+  font-weight: 700;
+}
+
+table tbody tr:hover {
+  background-color: #ffe600;
+}
+
+/* Status Badges & Action Buttons */
+.category-badge {
+  background: #ff3864;
+  color: #fff;
+  padding: 2px 8px;
+  border: 2px solid #000;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.table-edit-btn, .table-delete-btn {
+  border: 2px solid #000;
+  padding: 6px 12px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.table-edit-btn { background: var(--accent-color); }
+.table-delete-btn { background: var(--danger); color: white; }

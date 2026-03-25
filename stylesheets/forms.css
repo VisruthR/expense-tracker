@@ -1,0 +1,77 @@
+/* Section Titles & Labels */
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+.form-row { display: flex; gap: 1.5rem; }
+.half-width { flex: 1; }
+
+.form-group label {
+  background: #ff3864;
+  color: white;
+  padding: 2px 8px;
+  border: 2px solid #000;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* Brutalist Inputs & Selects */
+.form-controls {
+  background: #fff;
+  border: var(--brutal-border);
+  padding: 12px 14px;
+  width: 100%;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px #000;
+}
+
+/* Specific Select Styling (The Custom Arrow) */
+select.form-controls {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3e%3cpath d='M6 9l6 6 6-6'%3e%3c/path%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+
+/* Buttons & Toggles */
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent-color);
+  border: var(--brutal-border);
+  box-shadow: var(--brutal-shadow);
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 12px;
+  border: var(--brutal-border);
+  background: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.toggle-btn.active { background: var(--success); }
+.toggle-btn.non-active { background: rgba(255, 0, 0, 0.2); }
+
+.action-buttons { display: flex; gap: 15px; margin-top: 2rem; }
+.icon-btn { flex: 1; height: 50px; border: var(--brutal-border); box-shadow: var(--brutal-shadow-sm); cursor: pointer; }
+
+/* Income View Shared Styles */
+.total-switched, .total-balence {
+  display: block;
+  padding: 12px;
+  background: #fff;
+  border: var(--brutal-border);
+  box-shadow: 2px 2px 0px #000;
+  font-weight: 700;
+}
