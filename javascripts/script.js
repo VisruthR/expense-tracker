@@ -36,11 +36,6 @@ document.querySelectorAll(".action-buttons").forEach((group) => {
       downloadAnchorNode.click();
     }
 
-    if (icon.classList.contains("fa-calculator")) {
-      alert(
-        "Calculator feature coming soon! For now, use the 'Income' tab to see your balance.",
-      );
-    }
 
     if (icon.classList.contains("fa-upload")) {
       alert("Upload feature triggered. (Logic can be added here!)");
